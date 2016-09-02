@@ -7,4 +7,8 @@
     <string name="sensorTemp">Temperatura</string>
     <string name="sensorUmidade">Umidade</string>
 
+    <string name="speech_prompt">Say something&#8230;</string>
+    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
+    <string name="tap_on_mic">Tap on mic to speak</string>
+
 </resources>
