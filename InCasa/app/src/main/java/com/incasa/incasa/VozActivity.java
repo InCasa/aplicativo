@@ -32,6 +32,8 @@ public class VozActivity extends AppCompatActivity {
         txtSpeechInput = (TextView) findViewById(R.id.txtSpeechInput);
         btnSpeak = (ImageButton) findViewById(R.id.btnSpeak);
 
+        promptSpeechInput();
+
         btnSpeak.setOnClickListener(new View.OnClickListener() {
 
             @Override
