@@ -1,5 +1,6 @@
 package com.incasa.incasa;
 
+import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.os.Bundle;
@@ -14,9 +15,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String URL = "http://httpbin.org/get";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +47,8 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        atualizaValores(null, 1, null);
     }
 
     @Override
@@ -93,6 +109,52 @@ public class HomeActivity extends AppCompatActivity
     public void clickBtnVoz(View view){
         Intent it = new Intent(this, VozActivity.class);
         startActivity(it);
+    }
+
+    //Metodo responsável pelas requisições dos valores dos sensores
+    //metodo cod:
+    //1 GET
+    //2 POST
+    //3 PUT
+    //4 DELETE
+    public void atualizaValores(String url, int metodo, JSONObject corpo) {
+
+        //Parametros JsonObjectRequest:
+        //1- Metodo da requisição
+        //2- url do servidor
+        //3- Metodo para sucesso da requisição
+        //4- Metodo para falha na requisição
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
+            //Em caso de sucesso
+            @Override
+            public void onResponse(JSONObject response) {
+
+                Context context = getApplicationContext();
+                CharSequence text = "Sucesso na requisição";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        }, new Response.ErrorListener() {
+            //Em caso de erro
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Context context = getApplicationContext();
+                CharSequence text = "Erro na requisição";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });
+
+        //fila de requisições
+        RequestQueue fila = Volley.newRequestQueue(this);
+
+        //Adiciona a requisição á fila de requisições
+        fila.add(req);
+
     }
 
 }

@@ -7,13 +7,11 @@
 
     //Permissão dados WIFI
     <uses-permission
-        android:name="android.permission.ACCESS_WIFI_STATE"
-        android:maxSdkVersion="16" />
+        android:name="android.permission.ACCESS_WIFI_STATE" />
 
     //Permissão operações Internet
     <uses-permission
-        android:name="android.permission.INTERNET"
-        android:maxSdkVersion="16" />
+        android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
