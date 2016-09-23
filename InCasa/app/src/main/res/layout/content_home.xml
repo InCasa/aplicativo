@@ -58,8 +58,8 @@
         android:id="@+id/btnVoz"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="88dp"
-        android:background="@color/colorOrange"
+        android:layout_marginBottom="20dp"
+        android:background="@color/colorBlue"
         android:onClick="clickBtnVoz" />
 
 

@@ -4,23 +4,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_sensor"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_settings_remote_black_48dp"
             android:title="Sensores" />
         <item
             android:id="@+id/nav_rele"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_lightbulb_outline_black_48dp"
             android:title="Rele" />
         <item
             android:id="@+id/nav_voz"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_mic_black_48dp"
             android:title="Voz" />
         <item
             android:id="@+id/nav_config"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_settings_black_48dp"
             android:title="Configuração" />
         <item
             android:id="@+id/nav_admin"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_account_circle_black_48dp"
             android:title="Administrador" />
 
     </group>
