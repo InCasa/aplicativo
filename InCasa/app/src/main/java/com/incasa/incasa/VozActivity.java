@@ -15,6 +15,7 @@ import android.speech.RecognizerIntent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +23,7 @@ import android.widget.Toast;
 public class VozActivity extends AppCompatActivity {
 
     private TextView txtSpeechInput;
-    private ImageButton btnSpeak;
+    private View btnSpeak;
     private final int REQ_CODE_SPEECH_INPUT = 100;
 
     @Override
@@ -35,7 +36,7 @@ public class VozActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         txtSpeechInput = (TextView) findViewById(R.id.txtSpeechInput);
-        btnSpeak = (ImageButton) findViewById(R.id.btnSpeak);
+        btnSpeak = findViewById(R.id.btnSpeak);
 
         promptSpeechInput();
 
