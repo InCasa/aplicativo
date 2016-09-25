@@ -9,6 +9,6 @@
 
     <string name="speech_prompt">Comece a falar&#8230;</string>
     <string name="speech_not_supported">Desculpe! Seu dispositivo não suporta o reconhecimento de voz</string>
-    <string name="tap_on_mic">Comece a falar</string>
+    <string name="tap_on_mic">Toque para falar</string>
 
 </resources>
