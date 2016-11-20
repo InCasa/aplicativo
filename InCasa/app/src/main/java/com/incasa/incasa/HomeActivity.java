@@ -32,6 +32,9 @@ public class HomeActivity extends AppCompatActivity
 
     private static final String URL = "http://httpbin.org/get";
 
+    private static final String URLTEMPERATURA = "https://192.168.1.100/backend/temperaturaValor";
+    private static final String URLUMIDADE = "https://192.168.1.100/backend/umidadeValor";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,8 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         atualizaValores(null, 1, null);
+
+        getTemperatura();
     }
 
     @Override
@@ -109,6 +114,90 @@ public class HomeActivity extends AppCompatActivity
     public void clickBtnVoz(View view){
         Intent it = new Intent(this, VozActivity.class);
         startActivity(it);
+    }
+
+    public void getTemperatura() {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLTEMPERATURA, null, new Response.Listener<JSONObject>() {
+            //Em caso de sucesso
+            @Override
+            public void onResponse(JSONObject response) {
+
+                Context context = getApplicationContext();
+                CharSequence text = "Sucesso na requisição Temperatura: ";
+                int duration = Toast.LENGTH_SHORT;
+
+                String temp = "";
+
+                try {
+                    temp = response.getString("content");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Toast toast = Toast.makeText(context, text + temp, duration);
+                toast.show();
+
+            }
+        }, new Response.ErrorListener() {
+            //Em caso de erro
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Context context = getApplicationContext();
+                CharSequence text = "Erro na requisição";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });
+
+        //fila de requisições
+        RequestQueue fila = Volley.newRequestQueue(this);
+
+        //Adiciona a requisição á fila de requisições
+        fila.add(req);
+
+    }
+
+    public void getUmidade() {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLUMIDADE, null, new Response.Listener<JSONObject>() {
+            //Em caso de sucesso
+            @Override
+            public void onResponse(JSONObject response) {
+
+                Context context = getApplicationContext();
+                CharSequence text = "Sucesso na requisição Umidade";
+                int duration = Toast.LENGTH_SHORT;
+
+                String umi = "";
+
+                try {
+                    umi = response.getString("content");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Toast toast = Toast.makeText(context, text + umi, duration);
+                toast.show();
+            }
+        }, new Response.ErrorListener() {
+            //Em caso de erro
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Context context = getApplicationContext();
+                CharSequence text = "Erro na requisição";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });
+
+        //fila de requisições
+        RequestQueue fila = Volley.newRequestQueue(this);
+
+        //Adiciona a requisição á fila de requisições
+        fila.add(req);
     }
 
     //Metodo responsável pelas requisições dos valores dos sensores
