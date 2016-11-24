@@ -6,6 +6,8 @@
 
     <string name="sensorTemp">Temperatura</string>
     <string name="sensorUmidade">Umidade</string>
+    <string name="sensorLumi">Luminosidade</string>
+    <string name="sensorPrese">Presença</string>
 
     <string name="speech_prompt">Comece a falar&#8230;</string>
     <string name="speech_not_supported">Desculpe! Seu dispositivo não suporta o reconhecimento de voz</string>
