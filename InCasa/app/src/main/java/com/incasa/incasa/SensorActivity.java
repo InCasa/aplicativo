@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,8 +21,8 @@ public class SensorActivity extends AppCompatActivity {
 
     private final String URL = "http://httpbin.org/get";
 
-    private final String URLTEMPERATURA = "http://192.168.1.33/backend/temperaturaValor";
-    private final String URLUMIDADE = "https://192.168.1.33/backend/umidadeValor";
+    private final String URLTEMPERATURA = "http://192.168.0.100/backend/temperaturaValor";
+    private final String URLUMIDADE = "http://192.168.0.100/backend/umidadeValor";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,6 @@ public class SensorActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
-        atualizaValores(null, 1, null);
 
         getTemperatura();
         getUmidade();
@@ -47,6 +46,13 @@ public class SensorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Metodo responsável pelas requisições dos valores dos sensores
+    //metodo cod:
+    //1 GET
+    //2 POST
+    //3 PUT
+    //4 DELETE
+
     public void getTemperatura() {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLTEMPERATURA, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
@@ -60,7 +66,11 @@ public class SensorActivity extends AppCompatActivity {
                 String temp = "";
 
                 try {
-                    temp = response.getString("content");
+                    TextView txtTemp = (TextView) findViewById(R.id.txtTemp);
+                    temp = response.getString("valor");
+                    temp =  temp + " ºC";
+
+                    txtTemp.setText(temp);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -103,7 +113,11 @@ public class SensorActivity extends AppCompatActivity {
                 String umi = "";
 
                 try {
-                    umi = response.getString("content");
+                    TextView txtUmi = (TextView) findViewById(R.id.txtUmi);
+                    umi = response.getString("valor");
+                    umi =  umi + "%";
+
+                    txtUmi.setText(umi);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -131,49 +145,4 @@ public class SensorActivity extends AppCompatActivity {
         fila.add(req);
     }
 
-    //Metodo responsável pelas requisições dos valores dos sensores
-    //metodo cod:
-    //1 GET
-    //2 POST
-    //3 PUT
-    //4 DELETE
-    public void atualizaValores(String url, int metodo, JSONObject corpo) {
-
-        //Parametros JsonObjectRequest:
-        //1- Metodo da requisição
-        //2- url do servidor
-        //3- Metodo para sucesso da requisição
-        //4- Metodo para falha na requisição
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
-            //Em caso de sucesso
-            @Override
-            public void onResponse(JSONObject response) {
-
-                Context context = getApplicationContext();
-                CharSequence text = "Sucesso na requisição";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }
-        }, new Response.ErrorListener() {
-            //Em caso de erro
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Context context = getApplicationContext();
-                CharSequence text = "Erro na requisição";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }
-        });
-
-        //fila de requisições
-        RequestQueue fila = Volley.newRequestQueue(this);
-
-        //Adiciona a requisição á fila de requisições
-        fila.add(req);
-
-    }
 }
