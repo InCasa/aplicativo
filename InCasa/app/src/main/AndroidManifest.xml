@@ -2,16 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.incasa.incasa">
 
-    //SDK requerido
     <uses-sdk android:minSdkVersion="16" />
-
+    //SDK requerido
     //Permissão dados WIFI
-    <uses-permission
-        android:name="android.permission.ACCESS_WIFI_STATE" />
-
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     //Permissão operações Internet
-    <uses-permission
-        android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -22,12 +18,14 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName="com.incasa.incasa.HomeActivity" >
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.incasa.incasa.HomeActivity" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,7 +36,13 @@
         <activity android:name=".ReleActivity" />
         <activity android:name=".ConfigActivity" />
         <activity android:name=".AdminActivity" />
-        <activity android:name=".VozActivity"></activity>
+        <activity android:name=".VozActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".CadastroActivity"
+            android:label="@string/title_activity_cadastro"></activity>
     </application>
 
 </manifest>

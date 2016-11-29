@@ -38,6 +38,11 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        exibeTelaPrincipalOuSolicitaLogin();
+
+        finish();
+
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,6 +59,19 @@ public class HomeActivity extends AppCompatActivity
         atualizaValores(null, 1, null);
 
         getTemperatura();
+    }
+
+    private void exibeTelaPrincipalOuSolicitaLogin() {
+        Intent intent = new Intent(this, usuarioIsLogged() ? HomeActivity.class : LoginActivity.class);
+        startActivity(intent);
+    }
+
+    private boolean usuarioIsLogged() {
+        // Sua implementação que retorna se o usuário está logado ou não,
+        // obtida por exemplo verificando se o token de autenticação
+        // guardado em SharedPreferences é diferente de null.
+
+        return false;
     }
 
     @Override

@@ -4,6 +4,9 @@
     <color name="colorOrange">#ff8c00</color>
     <color name="colorAccent">#00BFFF</color>
     <color name="colorBlue">#1BC0F3</color>
+    <color name="colorConfirm">#3adb76</color>
+    <color name="colorCancel">#ec5840</color>
+    <color name="colorCadastro">#ffae00</color>
 
     <color name="white">#ffffff</color>
     <color name="bg_gradient_start">#31244e</color>
