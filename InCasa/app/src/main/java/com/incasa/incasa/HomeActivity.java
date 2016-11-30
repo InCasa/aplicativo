@@ -32,8 +32,8 @@ public class HomeActivity extends AppCompatActivity
 
     private static final String URL = "http://httpbin.org/get";
 
-    private static final String URLTEMPERATURA = "https://192.168.1.100/backend/temperaturaValor";
-    private static final String URLUMIDADE = "https://192.168.1.100/backend/umidadeValor";
+    private static final String URLTEMPERATURA = "http://192.168.0.100/backend/temperaturaValor";
+    private static final String URLUMIDADE = "http://192.168.0.100/backend/umidadeValor";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

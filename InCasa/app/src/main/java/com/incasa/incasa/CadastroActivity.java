@@ -55,17 +55,23 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class CadastroActivity extends AppCompatActivity {
 
-    EditText input_nome;
-    EditText input_login;
-    EditText input_password;
-    EditText input_cpassword;
+    private static final String URLCADASTRO = "http://192.168.0.100/backend/userLogin";
 
-    private static final String URLCADASTRO = "https://192.168.1.100/backend/userLogin";
+    String nomec = "";
+    String loginc = "";
+    String senhac = "";
+    String csenhac = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+
+        final EditText input_nome = (EditText) findViewById(R.id.input_nomec);
+        final EditText input_login = (EditText) findViewById(R.id.input_loginc);
+        final EditText input_password = (EditText) findViewById(R.id.input_passwordc);
+        final EditText input_cpassword = (EditText) findViewById(R.id.input_cpasswordc);
 
         Button btnCadastrar = (Button) findViewById(R.id.btn_cadastrar);
         Button btnCancelar = (Button) findViewById(R.id.btn_cancelar);
@@ -73,26 +79,41 @@ public class CadastroActivity extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(input_nome.getText() == null || input_login.getText() == null || input_password.getText() == null || input_cpassword.getText() == null) {
-                    Context context = getApplicationContext();
-                    CharSequence text = "Preencha todos os campos";
-                    int duration = Toast.LENGTH_SHORT;
+                nomec = input_nome.getText().toString();
+                loginc = input_login.getText().toString();
+                senhac = input_password.getText().toString();
+                csenhac = input_cpassword.getText().toString();
 
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-
+                if(TextUtils.isEmpty(nomec) || TextUtils.isEmpty(loginc) || TextUtils.isEmpty(senhac) || TextUtils.isEmpty(csenhac)) {
+                    if(TextUtils.isEmpty(nomec)) {
+                        input_nome.setError("Preencha o campo nome");
+                        return;
+                    }
+                    if(TextUtils.isEmpty(loginc)) {
+                        input_login.setError("Preencha o campo login");
+                        return;
+                    }
+                    if(TextUtils.isEmpty(senhac)) {
+                        input_password.setError("Preencha o campo senha");
+                        return;
+                    }
+                    if(TextUtils.isEmpty(csenhac)) {
+                        input_cpassword.setError("Preencha o campo confirmação de senha");
+                        return;
+                    }
                 } else {
-                    if(input_password.getText() != input_cpassword.getText()) {
+                    senhac = input_password.getText().toString();
+                    csenhac = input_cpassword.getText().toString();
+                    if(senhac.equals(csenhac)) {
+                        Cadastro();
+                    } else {
                         Context context = getApplicationContext();
-                        CharSequence text = "As senha devem ser iguais";
+                        CharSequence text = "As senhas devem ser iguais";
                         int duration = Toast.LENGTH_SHORT;
 
                         Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();;
-                    } else {
-                        Cadastro();
+                        toast.show();
                     }
-
                 }
             }
         });
@@ -111,10 +132,8 @@ public class CadastroActivity extends AppCompatActivity {
         //Em caso de sucesso
         @Override
         public void onResponse(JSONObject response) {
-
             Intent it = new Intent(CadastroActivity.this, HomeActivity.class);
             startActivity(it);
-
         }
     }, new Response.ErrorListener() {
         //Em caso de erro
@@ -132,9 +151,9 @@ public class CadastroActivity extends AppCompatActivity {
         @Override
         public Map<String, String> getHeaders() throws AuthFailureError {
             Map<String, String>  params = new HashMap<String, String>();
-            params.put("nome", input_nome.getText()+"");
-            params.put("login", input_login.getText()+"");
-            params.put("senha", input_password.getText()+"");
+            params.put("nome", nomec);
+            params.put("login", loginc);
+            params.put("senha", senhac);
 
             return params;
         }
