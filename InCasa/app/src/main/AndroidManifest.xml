@@ -32,17 +32,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".SensorActivity" />
         <activity android:name=".ReleActivity" />
         <activity android:name=".ConfigActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".VozActivity" />
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity
-            android:name=".CadastroActivity"
-            android:label="@string/title_activity_cadastro"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".CadastroActivity" />
+
     </application>
 
 </manifest>

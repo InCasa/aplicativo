@@ -58,32 +58,42 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String URLLOGIN = "https://192.168.1.100/backend/userLogin";
 
-    TextView input_login;
-    TextView input_password;
+    EditText input_login;
+    EditText input_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-    }
+        Button btnCadastro = (Button) findViewById(R.id.btn_cadastro);
+        Button btnLogin = (Button) findViewById(R.id.btn_login);
 
-    public void clickBtnCadastro(View view){
-        Intent it = new Intent(LoginActivity.this, CadastroActivity.class);
-        startActivity(it);
-    }
+        btnCadastro.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(LoginActivity.this, CadastroActivity.class);
+                startActivity(it);
+            }
+        });
 
-    public void clickBtnLogin(View view){
-        if(input_login.getText() == null || input_password.getText() == null) {
-            Context context = getApplicationContext();
-            CharSequence text = "Preencha todos os campos";
-            int duration = Toast.LENGTH_SHORT;
+        btnLogin.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(input_login.getText() == null || input_password.getText() == null) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Preencha todos os campos";
+                    int duration = Toast.LENGTH_SHORT;
 
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-        } else {
-            Login();
-        }
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } else {
+                    Login();
+                }
+            }
+        });
+
+
     }
 
     public void Login() {
@@ -110,7 +120,6 @@ public class LoginActivity extends AppCompatActivity {
         }){
 
             String testValue = input_login.getText()+":"+input_password.getText();
-
             byte[] encodeValue = Base64.encode(testValue.getBytes(), Base64.DEFAULT);
 
             @Override

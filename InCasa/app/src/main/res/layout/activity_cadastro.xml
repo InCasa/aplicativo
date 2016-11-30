@@ -7,17 +7,10 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="30dp"
+        android:paddingTop="20dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-        <ImageView android:src="@mipmap/ic_logo"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginBottom="24dp"
-            android:layout_gravity="center_horizontal" />
-
-        <!--  Nome Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,10 +19,9 @@
             <EditText android:id="@+id/input_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Login" />
+                android:hint="Nome" />
         </android.support.design.widget.TextInputLayout>
 
-        <!--  Email Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +33,6 @@
                 android:hint="Login" />
         </android.support.design.widget.TextInputLayout>
 
-        <!--  Password Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,27 +45,37 @@
                 android:hint="Senha"/>
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/input_cpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Confirmar Senha"/>
+        </android.support.design.widget.TextInputLayout>
+
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_cadastro"
+            android:id="@+id/btn_cadastrar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="20dp"
             android:padding="12dp"
             android:text="Cadastrar"
-            android:background="@color/colorConfirm"
-            android:onClick="clickBtnCadastro" />
+            android:background="@color/colorConfirm" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_cancelar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
             android:background="@color/colorCancel"
-            android:text="Cancelar"
-            android:onClick="clickBtnCancelar"/>
+            android:text="Cancelar" />
 
     </LinearLayout>
 </ScrollView>

@@ -55,9 +55,10 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class CadastroActivity extends AppCompatActivity {
 
-    TextView input_nome;
-    TextView input_login;
-    TextView input_password;
+    EditText input_nome;
+    EditText input_login;
+    EditText input_password;
+    EditText input_cpassword;
 
     private static final String URLCADASTRO = "https://192.168.1.100/backend/userLogin";
 
@@ -66,24 +67,44 @@ public class CadastroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-    }
+        Button btnCadastrar = (Button) findViewById(R.id.btn_cadastrar);
+        Button btnCancelar = (Button) findViewById(R.id.btn_cancelar);
 
-    public void clickBtnCadastro(View view){
-        if(input_nome.getText() == null || input_login.getText() == null || input_password.getText() == null) {
-            Context context = getApplicationContext();
-            CharSequence text = "Preencha todos os campos";
-            int duration = Toast.LENGTH_SHORT;
+        btnCadastrar.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(input_nome.getText() == null || input_login.getText() == null || input_password.getText() == null || input_cpassword.getText() == null) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Preencha todos os campos";
+                    int duration = Toast.LENGTH_SHORT;
 
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-        } else {
-            Cadastro();
-        }
-    }
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
 
-    public void clickBtnCancelar(View view){
-        Intent it = new Intent(CadastroActivity.this, LoginActivity.class);
-        startActivity(it);
+                } else {
+                    if(input_password.getText() != input_cpassword.getText()) {
+                        Context context = getApplicationContext();
+                        CharSequence text = "As senha devem ser iguais";
+                        int duration = Toast.LENGTH_SHORT;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();;
+                    } else {
+                        Cadastro();
+                    }
+
+                }
+            }
+        });
+
+        btnCancelar.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(CadastroActivity.this, LoginActivity.class);
+                startActivity(it);
+            }
+        });
+
     }
 
     public void Cadastro() { JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URLCADASTRO, null, new Response.Listener<JSONObject>() {
