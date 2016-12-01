@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -84,8 +85,17 @@ public class LoginActivity extends AppCompatActivity {
             //Em caso de sucesso
             @Override
             public void onResponse(JSONObject response) {
-                Intent it = new Intent(LoginActivity.this, HomeActivity.class);
-                startActivity(it);
+                boolean Authorization = false;
+                try {
+                    Authorization = response.getBoolean("Authorized");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(Authorization == true){
+                    Intent it = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(it);
+                }
+
             }
         }, new Response.ErrorListener() {
             //Em caso de erro
@@ -101,12 +111,15 @@ public class LoginActivity extends AppCompatActivity {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> params = new HashMap<String, String>();
-                String creds = String.format("%s:%s", login, senha);
-                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.DEFAULT);
-                params.put("Authorization", auth);
-                return params;
+                Map<String,String> headers = new HashMap<String, String>();
+                // add headers <key,value>
+                String auth = new String(Base64.encode((login + ":" + senha).getBytes(), Base64.DEFAULT));
+
+                headers.put("Authorization ", " Basic " + auth);
+                Log.d("Application started", String.valueOf(headers));
+                return headers;
             }
+
         };
 
         //fila de requisições
