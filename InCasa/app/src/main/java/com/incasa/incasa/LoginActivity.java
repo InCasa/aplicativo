@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -32,8 +33,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String URLLOGIN = "http://192.168.0.100/backend/userLogin";
 
-    String login = "admin";
-    String senha = "admin";
+    String login = "";
+    String senha = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

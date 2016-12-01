@@ -39,8 +39,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -55,7 +57,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class CadastroActivity extends AppCompatActivity {
 
-    private static final String URLCADASTRO = "http://192.168.0.100/backend/userLogin";
+    private static final String URLCADASTRO = "http://192.168.0.100/backend/user";
 
     String nomec = "";
     String loginc = "";
@@ -105,7 +107,17 @@ public class CadastroActivity extends AppCompatActivity {
                     senhac = input_password.getText().toString();
                     csenhac = input_cpassword.getText().toString();
                     if(senhac.equals(csenhac)) {
-                        Cadastro();
+                        //Criação do Json da requisição
+                        JSONObject jsonBody = new JSONObject();
+                        try {
+                            jsonBody.put("nome", nomec);
+                            jsonBody.put("login", loginc);
+                            jsonBody.put("senha", senhac);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        Cadastro(jsonBody);
                     } else {
                         Context context = getApplicationContext();
                         CharSequence text = "As senhas devem ser iguais";
@@ -128,37 +140,25 @@ public class CadastroActivity extends AppCompatActivity {
 
     }
 
-    public void Cadastro() { JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URLCADASTRO, null, new Response.Listener<JSONObject>() {
-        //Em caso de sucesso
-        @Override
-        public void onResponse(JSONObject response) {
-            Intent it = new Intent(CadastroActivity.this, HomeActivity.class);
-            startActivity(it);
-        }
-    }, new Response.ErrorListener() {
-        //Em caso de erro
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Context context = getApplicationContext();
-            CharSequence text = "Erro no cadastro";
-            int duration = Toast.LENGTH_SHORT;
+    public void Cadastro(JSONObject json) {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URLCADASTRO, json, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Intent it = new Intent(CadastroActivity.this, HomeActivity.class);
+                        startActivity(it);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Context context = getApplicationContext();
+                CharSequence text = "Erro no cadastro";
+                int duration = Toast.LENGTH_SHORT;
 
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-        }
-    }){
-
-        @Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String>  params = new HashMap<String, String>();
-            params.put("nome", nomec);
-            params.put("login", loginc);
-            params.put("senha", senhac);
-
-            return params;
-        }
-    };
-
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });
+// Add the request to the RequestQueue.
         //fila de requisições
         RequestQueue fila = Volley.newRequestQueue(this);
 
