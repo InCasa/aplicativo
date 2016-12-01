@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -39,9 +40,9 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        exibeTelaPrincipalOuSolicitaLogin();
+        //exibeTelaPrincipalOuSolicitaLogin();
 
-        finish();
+        //finish();
 
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -59,17 +60,19 @@ public class HomeActivity extends AppCompatActivity
         //atualizaValores(null, 1, null);
 
         getTemperatura();
+        getUmidade();
     }
 
     private void exibeTelaPrincipalOuSolicitaLogin() {
-        Intent intent = new Intent(this, usuarioIsLogged() ? HomeActivity.class : LoginActivity.class);
-        startActivity(intent);
+        if(!usuarioIsLogged()) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     private boolean usuarioIsLogged() {
-        // Sua implementação que retorna se o usuário está logado ou não,
-        // obtida por exemplo verificando se o token de autenticação
-        // guardado em SharedPreferences é diferente de null.
+
 
         return false;
     }
@@ -147,7 +150,11 @@ public class HomeActivity extends AppCompatActivity
                 String temp = "";
 
                 try {
-                    temp = response.getString("content");
+                    TextView txtTemp = (TextView) findViewById(R.id.txtTemp);
+                    temp = response.getString("valor");
+                    temp =  temp + " ºC";
+
+                    txtTemp.setText(temp);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -190,7 +197,11 @@ public class HomeActivity extends AppCompatActivity
                 String umi = "";
 
                 try {
-                    umi = response.getString("content");
+                    TextView txtUmi = (TextView) findViewById(R.id.txtUmi);
+                    umi = response.getString("valor");
+                    umi =  umi + "%";
+
+                    txtUmi.setText(umi);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

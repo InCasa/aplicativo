@@ -144,7 +144,7 @@ public class CadastroActivity extends AppCompatActivity {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URLCADASTRO, json, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Intent it = new Intent(CadastroActivity.this, HomeActivity.class);
+                        Intent it = new Intent(CadastroActivity.this, LoginActivity.class);
                         startActivity(it);
                     }
                 }, new Response.ErrorListener() {

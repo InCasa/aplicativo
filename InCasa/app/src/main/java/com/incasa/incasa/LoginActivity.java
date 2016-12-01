@@ -1,8 +1,11 @@
 package com.incasa.incasa;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -30,7 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
 
     private static final String URLLOGIN = "http://192.168.0.100/backend/userLogin";
 
@@ -94,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(Authorization == true){
                     Intent it = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(it);
+                    finish();
                 }
 
             }
