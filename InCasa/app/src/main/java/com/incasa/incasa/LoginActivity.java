@@ -32,6 +32,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.User;
+
 
 public class LoginActivity extends Activity {
 
@@ -95,6 +97,13 @@ public class LoginActivity extends Activity {
                     e.printStackTrace();
                 }
                 if(Authorization == true){
+                    //Obtem a instancia vazia do User
+                    User user = User.getInstancia();
+                    //Adiciona login e senha na instancia
+                    user.setLogin(login);
+                    user.setSenha(senha);
+                    Log.i("Login do Usuario: ",  user.getLogin());
+                    Log.i("Login do Senha: ",  user.getSenha());
                     Intent it = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(it);
                     finish();

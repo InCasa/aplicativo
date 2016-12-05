@@ -2,10 +2,8 @@ package com.incasa.incasa;
 
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.Sensor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,6 +26,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import model.User;
+
+
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,7 +41,7 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //exibeTelaPrincipalOuSolicitaLogin();
+        exibeTelaPrincipalOuSolicitaLogin();
 
         //finish();
 
@@ -57,10 +58,9 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //atualizaValores(null, 1, null);
-
         getTemperatura();
         getUmidade();
+
     }
 
     private void exibeTelaPrincipalOuSolicitaLogin() {
@@ -72,9 +72,12 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private boolean usuarioIsLogged() {
-
-
-        return false;
+        User user = User.getInstancia();
+        if(user.getSenha() == null){
+            return false;
+        }else {
+            return true;
+        }
     }
 
     @Override
@@ -137,7 +140,19 @@ public class HomeActivity extends AppCompatActivity
         startActivity(it);
     }
 
+    //Metodo responsável pelas requisições dos valores dos sensores
+    //metodo cod:
+    //1 GET
+    //2 POST
+    //3 PUT
+    //4 DELETE
+
     public void getTemperatura() {
+        //Parametros JsonObjectRequest:
+        //1- Metodo da requisição
+        //2- url do servidor
+        //3- Metodo para sucesso da requisição
+        //4- Metodo para falha na requisição
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLTEMPERATURA, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override
@@ -152,9 +167,13 @@ public class HomeActivity extends AppCompatActivity
                 try {
                     TextView txtTemp = (TextView) findViewById(R.id.txtTemp);
                     temp = response.getString("valor");
-                    temp =  temp + " ºC";
 
-                    txtTemp.setText(temp);
+                    if(temp.equals("null")){
+                        txtTemp.setText("N/A");
+                    }else {
+                        temp =  temp + " ºC";
+                        txtTemp.setText(temp);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -199,9 +218,13 @@ public class HomeActivity extends AppCompatActivity
                 try {
                     TextView txtUmi = (TextView) findViewById(R.id.txtUmi);
                     umi = response.getString("valor");
-                    umi =  umi + "%";
 
-                    txtUmi.setText(umi);
+                    if(umi.equals("null")){
+                        txtUmi.setText("N/A");
+                    }else {
+                        umi =  umi + "%";
+                        txtUmi.setText(umi);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -227,52 +250,6 @@ public class HomeActivity extends AppCompatActivity
 
         //Adiciona a requisição á fila de requisições
         fila.add(req);
-    }
-
-    //Metodo responsável pelas requisições dos valores dos sensores
-    //metodo cod:
-    //1 GET
-    //2 POST
-    //3 PUT
-    //4 DELETE
-    public void atualizaValores(String url, int metodo, JSONObject corpo) {
-
-        //Parametros JsonObjectRequest:
-        //1- Metodo da requisição
-        //2- url do servidor
-        //3- Metodo para sucesso da requisição
-        //4- Metodo para falha na requisição
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
-            //Em caso de sucesso
-            @Override
-            public void onResponse(JSONObject response) {
-
-                Context context = getApplicationContext();
-                CharSequence text = "Sucesso na requisição";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }
-        }, new Response.ErrorListener() {
-            //Em caso de erro
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Context context = getApplicationContext();
-                CharSequence text = "Erro na requisição";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }
-        });
-
-        //fila de requisições
-        RequestQueue fila = Volley.newRequestQueue(this);
-
-        //Adiciona a requisição á fila de requisições
-        fila.add(req);
-
     }
 
 }

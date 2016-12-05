@@ -68,9 +68,13 @@ public class SensorActivity extends AppCompatActivity {
                 try {
                     TextView txtTemp = (TextView) findViewById(R.id.txtTemp);
                     temp = response.getString("valor");
-                    temp =  temp + " ºC";
 
-                    txtTemp.setText(temp);
+                    if(temp.equals("null")){
+                        txtTemp.setText("N/A");
+                    }else {
+                        temp =  temp + " ºC";
+                        txtTemp.setText(temp);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -115,9 +119,13 @@ public class SensorActivity extends AppCompatActivity {
                 try {
                     TextView txtUmi = (TextView) findViewById(R.id.txtUmi);
                     umi = response.getString("valor");
-                    umi =  umi + "%";
 
-                    txtUmi.setText(umi);
+                    if(umi.equals("null")){
+                        txtUmi.setText("N/A");
+                    }else {
+                        umi =  umi + "%";
+                        txtUmi.setText(umi);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
