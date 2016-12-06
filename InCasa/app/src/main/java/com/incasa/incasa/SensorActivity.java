@@ -19,10 +19,10 @@ import org.json.JSONObject;
 
 public class SensorActivity extends AppCompatActivity {
 
-    private final String URL = "http://httpbin.org/get";
-
     private final String URLTEMPERATURA = "http://192.168.0.100/backend/temperaturaValor";
     private final String URLUMIDADE = "http://192.168.0.100/backend/umidadeValor";
+    private final String URLLUMINOSIDADE = "http://192.168.0.100/backend/luminosidadeValor";
+    private final String URLPRESENCA = "http://192.168.0.100/backend/presencaValor";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,8 @@ public class SensorActivity extends AppCompatActivity {
 
         getTemperatura();
         getUmidade();
+        getLuminosidade();
+        getPresenca();
 
     }
 
@@ -46,41 +48,27 @@ public class SensorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //Metodo responsável pelas requisições dos valores dos sensores
-    //metodo cod:
-    //1 GET
-    //2 POST
-    //3 PUT
-    //4 DELETE
-
     public void getTemperatura() {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLTEMPERATURA, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override
             public void onResponse(JSONObject response) {
 
-                Context context = getApplicationContext();
-                CharSequence text = "Sucesso na requisição Temperatura: ";
-                int duration = Toast.LENGTH_SHORT;
+            String temp = "";
 
-                String temp = "";
+            try {
+                TextView txtTemp = (TextView) findViewById(R.id.txtTemp);
+                temp = response.getString("valor");
 
-                try {
-                    TextView txtTemp = (TextView) findViewById(R.id.txtTemp);
-                    temp = response.getString("valor");
-
-                    if(temp.equals("null")){
-                        txtTemp.setText("N/A");
-                    }else {
-                        temp =  temp + " ºC";
-                        txtTemp.setText(temp);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if(temp.equals("null")){
+                    txtTemp.setText("N/A");
+                }else {
+                    temp =  temp + " ºC";
+                    txtTemp.setText(temp);
                 }
-
-                Toast toast = Toast.makeText(context, text + temp, duration);
-                toast.show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
             }
         }, new Response.ErrorListener() {
@@ -110,28 +98,114 @@ public class SensorActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
+            String umi = "";
+
+            try {
+                TextView txtUmi = (TextView) findViewById(R.id.txtUmi);
+                umi = response.getString("valor");
+
+                if(umi.equals("null")){
+                    txtUmi.setText("N/A");
+                }else {
+                    umi =  umi + "%";
+                    txtUmi.setText(umi);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            }
+        }, new Response.ErrorListener() {
+            //Em caso de erro
+            @Override
+            public void onErrorResponse(VolleyError error) {
                 Context context = getApplicationContext();
-                CharSequence text = "Sucesso na requisição Umidade";
+                CharSequence text = "Erro na requisição";
                 int duration = Toast.LENGTH_SHORT;
 
-                String umi = "";
-
-                try {
-                    TextView txtUmi = (TextView) findViewById(R.id.txtUmi);
-                    umi = response.getString("valor");
-
-                    if(umi.equals("null")){
-                        txtUmi.setText("N/A");
-                    }else {
-                        umi =  umi + "%";
-                        txtUmi.setText(umi);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                Toast toast = Toast.makeText(context, text + umi, duration);
+                Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+            }
+        });
+
+        //fila de requisições
+        RequestQueue fila = Volley.newRequestQueue(this);
+
+        //Adiciona a requisição á fila de requisições
+        fila.add(req);
+    }
+
+    public void getLuminosidade() {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLLUMINOSIDADE, null, new Response.Listener<JSONObject>() {
+            //Em caso de sucesso
+            @Override
+            public void onResponse(JSONObject response) {
+
+            String lumi = "";
+
+            try {
+                TextView txtLumi = (TextView) findViewById(R.id.txtLumi);
+                lumi = response.getString("valor");
+
+                if(lumi.equals("null")){
+                    txtLumi.setText("N/A");
+                }else {
+                    lumi =  lumi;
+                    txtLumi.setText(lumi);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            }
+        }, new Response.ErrorListener() {
+            //Em caso de erro
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Context context = getApplicationContext();
+                CharSequence text = "Erro na requisição";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });
+
+        //fila de requisições
+        RequestQueue fila = Volley.newRequestQueue(this);
+
+        //Adiciona a requisição á fila de requisições
+        fila.add(req);
+    }
+
+    public void getPresenca() {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLPRESENCA, null, new Response.Listener<JSONObject>() {
+            //Em caso de sucesso
+            @Override
+            public void onResponse(JSONObject response) {
+
+            String presenca = "";
+
+            try {
+                TextView txtPresenca = (TextView) findViewById(R.id.txtPresenca);
+                presenca = response.getString("valor");
+
+                if(presenca.equals("null")){
+                    txtPresenca.setText("N/A");
+                }else {
+                    if(presenca.equals("1")) {
+                        presenca =  "Detectado";
+                        txtPresenca.setText(presenca);
+                    } else {
+                        presenca =  "Não Detectado";
+                        txtPresenca.setText(presenca);
+                    }
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             }
         }, new Response.ErrorListener() {
             //Em caso de erro
