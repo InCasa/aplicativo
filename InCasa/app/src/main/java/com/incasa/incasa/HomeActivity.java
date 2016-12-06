@@ -140,46 +140,30 @@ public class HomeActivity extends AppCompatActivity
         startActivity(it);
     }
 
-    //Metodo responsável pelas requisições dos valores dos sensores
-    //metodo cod:
-    //1 GET
-    //2 POST
-    //3 PUT
-    //4 DELETE
+
 
     public void getTemperatura() {
-        //Parametros JsonObjectRequest:
-        //1- Metodo da requisição
-        //2- url do servidor
-        //3- Metodo para sucesso da requisição
-        //4- Metodo para falha na requisição
+
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLTEMPERATURA, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override
             public void onResponse(JSONObject response) {
 
-                Context context = getApplicationContext();
-                CharSequence text = "Sucesso na requisição Temperatura: ";
-                int duration = Toast.LENGTH_SHORT;
+            String temp = "";
 
-                String temp = "";
+            try {
+                TextView txtTemp = (TextView) findViewById(R.id.txtTemp);
+                temp = response.getString("valor");
 
-                try {
-                    TextView txtTemp = (TextView) findViewById(R.id.txtTemp);
-                    temp = response.getString("valor");
-
-                    if(temp.equals("null")){
-                        txtTemp.setText("N/A");
-                    }else {
-                        temp =  temp + " ºC";
-                        txtTemp.setText(temp);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if(temp.equals("null")){
+                    txtTemp.setText("N/A");
+                }else {
+                    temp =  temp + " ºC";
+                    txtTemp.setText(temp);
                 }
-
-                Toast toast = Toast.makeText(context, text + temp, duration);
-                toast.show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
             }
         }, new Response.ErrorListener() {
@@ -209,28 +193,22 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onResponse(JSONObject response) {
 
-                Context context = getApplicationContext();
-                CharSequence text = "Sucesso na requisição Umidade";
-                int duration = Toast.LENGTH_SHORT;
+            String umi = "";
 
-                String umi = "";
+            try {
+                TextView txtUmi = (TextView) findViewById(R.id.txtUmi);
+                umi = response.getString("valor");
 
-                try {
-                    TextView txtUmi = (TextView) findViewById(R.id.txtUmi);
-                    umi = response.getString("valor");
-
-                    if(umi.equals("null")){
-                        txtUmi.setText("N/A");
-                    }else {
-                        umi =  umi + "%";
-                        txtUmi.setText(umi);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if(umi.equals("null")){
+                    txtUmi.setText("N/A");
+                }else {
+                    umi =  umi + "%";
+                    txtUmi.setText(umi);
                 }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-                Toast toast = Toast.makeText(context, text + umi, duration);
-                toast.show();
             }
         }, new Response.ErrorListener() {
             //Em caso de erro

@@ -14,82 +14,46 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.incasa.incasa.ConfigActivity">
 
+        <TextView
+            android:text="Endereço IP do Servidor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewConfig1" />
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editIP"
+            android:hint="192.168.0.100"
+            android:layout_below="@+id/textViewConfig1" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Rele 1"
-                android:id="@+id/lblRele1"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+        <TextView
+            android:text="Nome do Smartphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewConfig2"
+            android:layout_below="@+id/editIP" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Rele 2"
-                android:id="@+id/lblRele2"
-                android:layout_below="@+id/lblRele1"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="80dp" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/editName"
+            android:hint="Celular Leonardo"
+            android:layout_below="@+id/textViewConfig2"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Rele 3"
-                android:id="@+id/lblRele3"
-                android:layout_below="@+id/lblRele2"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="80dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Rele 4"
-                android:id="@+id/lblRele4"
-                android:layout_below="@+id/lblRele3"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="80dp" />
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/switch1"
-                android:layout_alignTop="@+id/lblRele1"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/switch2"
-                android:layout_alignTop="@+id/lblRele2"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/switch3"
-                android:layout_alignTop="@+id/lblRele3"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/switch4"
-                android:layout_below="@+id/lblRele4"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+        <Button
+            android:text="Alterar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:layout_marginBottom="16px"
+            android:layout_below="@+id/editName"
+            android:background="@color/colorConfirm"
+            android:id="@+id/btnConfig" />
 
 
     </RelativeLayout>
