@@ -38,8 +38,12 @@
         <activity android:name=".ConfigActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".VozActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".CadastroActivity" />
+        <activity android:name=".LoginActivity"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity android:name=".CadastroActivity"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
 
     </application>
 
