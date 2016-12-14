@@ -24,6 +24,7 @@ public class ConfigActivity extends AppCompatActivity {
 
         mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
         mViewPager = (ViewPager) findViewById(R.id.view_Pager);
+        mTabLayout.setTabMode(mTabLayout.MODE_SCROLLABLE);
 
         mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager(),getResources().getStringArray(R.array.titulos_tab)));
 
