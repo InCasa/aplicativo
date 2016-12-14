@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <TextView
+        android:text="Endereço do servidor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig2"
+        android:layout_below="@+id/editIP" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/editName"
+        android:hint="192.168.0.100"
+        android:layout_below="@+id/textViewConfig2"/>
+
+    <Button
+        android:text="Alterar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="16px"
+        android:layout_below="@+id/editName"
+        android:background="@color/colorConfirm"
+        android:id="@+id/btnConfig" />
+
+</RelativeLayout>

@@ -29,4 +29,10 @@
     <string name="title_activity_cadastro">Cadastro</string>
     <string name="ip_server">192.168.0.100</string>
 
+    <string-array name="titulos_tab">
+        <item>Arduino</item>
+        <item>Celular</item>
+        <item>Servidor</item>
+    </string-array>
+
 </resources>

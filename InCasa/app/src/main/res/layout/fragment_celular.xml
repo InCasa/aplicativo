@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:text="Endereço MAC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig1" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editIP"
+        android:hint="22-59-10-9D-9F-0F"
+        android:layout_below="@+id/textViewConfig1" />
+
+    <TextView
+        android:text="Nome do Smartphone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig2"
+        android:layout_below="@+id/editIP" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/editName"
+        android:hint="Celular Leonardo"
+        android:layout_below="@+id/textViewConfig2"/>
+
+    <Button
+        android:text="Alterar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="16px"
+        android:layout_below="@+id/editName"
+        android:background="@color/colorConfirm"
+        android:id="@+id/btnConfig" />
+
+
+</RelativeLayout>

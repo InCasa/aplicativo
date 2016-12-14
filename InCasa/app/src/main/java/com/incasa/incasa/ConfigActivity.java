@@ -1,10 +1,18 @@
 package com.incasa.incasa;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.incasa.incasa.fragments.FragmentPagerAdapter;
+
+import java.util.ArrayList;
+
 public class ConfigActivity extends AppCompatActivity {
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,6 +21,13 @@ public class ConfigActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        mViewPager = (ViewPager) findViewById(R.id.view_Pager);
+
+        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager(),getResources().getStringArray(R.array.titulos_tab)));
+
+        mTabLayout.setupWithViewPager(mViewPager);
 
     }
 
