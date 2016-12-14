@@ -32,7 +32,9 @@
     <string-array name="titulos_tab">
         <item>Arduino</item>
         <item>Celular</item>
-        <item>Servidor</item>
+        <item>Server</item>
+        <item>Rele</item>
+        <item>Sensor</item>
     </string-array>
 
 </resources>

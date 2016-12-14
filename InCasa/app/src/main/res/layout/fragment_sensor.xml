@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="Nome Sensor Temperatura:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewSensor1" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Temperatura"
+            android:ems="10"
+            android:id="@+id/editNameSensor1"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Descrição Sensor Temperatura:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewSensor5" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Descrição"
+            android:ems="10"
+            android:id="@+id/editDescSensor1"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Nome Sensor Umidade:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewSensor2" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Umidade"
+            android:ems="10"
+            android:id="@+id/editNameSensor2"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Descrição Sensor Umidade:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewSensor6" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Descrição"
+            android:ems="10"
+            android:id="@+id/editDescSensor2"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Nome Sensor Luminosidade:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewSensor3" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Luminosidade"
+            android:ems="10"
+            android:id="@+id/editNameSensor3"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Descrição Sensor Luminosidade:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewSensor7" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Descrição"
+            android:ems="10"
+            android:id="@+id/editDescSensor3"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Nome Sensor Presença:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewSensor4" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Presença"
+            android:ems="10"
+            android:id="@+id/editNameSensor4"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Descrição Sensor Presença:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewSensor8" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Descrição"
+            android:ems="10"
+            android:id="@+id/editDescSensor4"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="Alterar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:layout_marginBottom="16px"
+            android:layout_below="@+id/editName"
+            android:background="@color/colorConfirm"
+            android:id="@+id/btnSensorConfig" />
+
+    </LinearLayout>
+
+</ScrollView>

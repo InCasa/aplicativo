@@ -21,6 +21,10 @@ public class FragmentPagerAdapter extends android.support.v4.app.FragmentPagerAd
                 return new FragmentCelular();
             case 2:
                 return new  FragmentServidor();
+            case 3:
+                return new FragmentRele();
+            case 4:
+                return new FragmentSensor();
             default:
                 return null;
         }

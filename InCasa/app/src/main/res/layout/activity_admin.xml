@@ -4,130 +4,69 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:text="Nome Rele 1:"
+            android:text="Login:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewAdmin1" />
+            android:id="@+id/textViewAdm1" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Rele 1"
+            android:text="Login"
             android:ems="10"
-            android:id="@+id/editNameRele1"
+            android:id="@+id/editLogin1"
             android:layout_weight="1" />
 
         <TextView
-            android:text="Descrição Rele 1:"
+            android:text="Senha Antiga:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewAdmin5" />
+            android:id="@+id/textViewAdm2" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="Descrição Rele 1"
+            android:inputType="textPassword"
+            android:text="123456"
             android:ems="10"
-            android:id="@+id/editDescRele1"
+            android:id="@+id/editSenhaAnt"
             android:layout_weight="1" />
 
         <TextView
-            android:text="Nome Rele 2:"
+            android:text="Senha Nova:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewAdmin2" />
+            android:id="@+id/textViewAdm3" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="Rele 2"
+            android:inputType="textPassword"
+            android:text="123456"
             android:ems="10"
-            android:id="@+id/editNameRele2"
+            android:id="@+id/editSenhaNov"
             android:layout_weight="1" />
 
         <TextView
-            android:text="Descrição Rele 2:"
+            android:text="Confirmar Senha Nova:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewAdmin6" />
+            android:id="@+id/textViewAdm4" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="Descrição Rele 2"
+            android:inputType="textPassword"
+            android:text="123456"
             android:ems="10"
-            android:id="@+id/editDescRele2"
-            android:layout_weight="1" />
-
-        <TextView
-            android:text="Nome Rele 3:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewAdmin3" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="Rele 3"
-            android:ems="10"
-            android:id="@+id/editNameRele3"
-            android:layout_weight="1" />
-
-        <TextView
-            android:text="Descrição Rele 3:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewAdmin7" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="Descrição Rele 3"
-            android:ems="10"
-            android:id="@+id/editDescRele3"
-            android:layout_weight="1" />
-
-        <TextView
-            android:text="Nome Rele 4:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewAdmin4" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="Rele 4"
-            android:ems="10"
-            android:id="@+id/editNameRele4"
-            android:layout_weight="1" />
-
-        <TextView
-            android:text="Descrição Rele 4:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewAdmin8" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="Descrição Rele 4"
-            android:ems="10"
-            android:id="@+id/editDescRele4"
+            android:id="@+id/editSenhaNovC"
             android:layout_weight="1" />
 
         <Button
@@ -138,19 +77,8 @@
             android:layout_marginBottom="16px"
             android:layout_below="@+id/editName"
             android:background="@color/colorConfirm"
-            android:id="@+id/btnConfig" />
+            android:id="@+id/btnAdm" />
 
     </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
 
 </ScrollView>

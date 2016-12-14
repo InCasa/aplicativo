@@ -18,4 +18,5 @@
         android:id="@+id/view_Pager"
         android:layout_below="@+id/tab_layout"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

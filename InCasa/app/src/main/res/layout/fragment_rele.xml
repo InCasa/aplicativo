@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="Nome Rele 1:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewAdmin1" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Rele 1"
+            android:ems="10"
+            android:id="@+id/editNameRele1"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Descrição Rele 1:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewAdmin5" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Descrição Rele 1"
+            android:ems="10"
+            android:id="@+id/editDescRele1"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Nome Rele 2:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewAdmin2" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Rele 2"
+            android:ems="10"
+            android:id="@+id/editNameRele2"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Descrição Rele 2:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewAdmin6" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Descrição Rele 2"
+            android:ems="10"
+            android:id="@+id/editDescRele2"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Nome Rele 3:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewAdmin3" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Rele 3"
+            android:ems="10"
+            android:id="@+id/editNameRele3"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Descrição Rele 3:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewAdmin7" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Descrição Rele 3"
+            android:ems="10"
+            android:id="@+id/editDescRele3"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Nome Rele 4:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewAdmin4" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Rele 4"
+            android:ems="10"
+            android:id="@+id/editNameRele4"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Descrição Rele 4:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewAdmin8" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Descrição Rele 4"
+            android:ems="10"
+            android:id="@+id/editDescRele4"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="Alterar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:layout_marginBottom="16px"
+            android:layout_below="@+id/editName"
+            android:background="@color/colorConfirm"
+            android:id="@+id/btnConfig" />
+
+    </LinearLayout>
+
+</ScrollView>
