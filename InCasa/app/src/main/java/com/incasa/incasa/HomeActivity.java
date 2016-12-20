@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity
 
         exibeTelaPrincipalOuSolicitaLogin();
 
-        //finish();
+        finish();
 
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
