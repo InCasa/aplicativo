@@ -2,6 +2,7 @@ package com.incasa.incasa;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -33,12 +34,16 @@ public class ServerActivity extends AppCompatActivity {
         final ProgressBar bar = (ProgressBar) findViewById(R.id.progressBar);
         Button btnOK = (Button) findViewById(R.id.btn_ok);
 
+        if(getServer() != " "){
+            ip_server.setText(getServer());
+        }
+
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bar.setProgress(20);
 
-                String ip = "http://"+ip_server.getText().toString()+"/backend/teste";
+                String ip = ip_server.getText().toString();
 
                 if (TextUtils.isEmpty(ip)) {
                     bar.setProgress(0);
@@ -49,11 +54,11 @@ public class ServerActivity extends AppCompatActivity {
         });
     }
 
-    public void testeServer(String ipServer) {
+    public void testeServer(final String ipServer) {
 
         final ProgressBar bar = (ProgressBar) findViewById(R.id.progressBar);
 
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, ipServer, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, "http://"+ipServer+"/backend/teste", null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override
             public void onResponse(JSONObject response) {
@@ -63,6 +68,8 @@ public class ServerActivity extends AppCompatActivity {
                 Context context = getApplicationContext();
                 CharSequence text = "Servidor: OK";
                 int duration = Toast.LENGTH_SHORT;
+
+                saveServer(ipServer);
 
                 bar.setProgress(80);
 
@@ -95,5 +102,18 @@ public class ServerActivity extends AppCompatActivity {
 
         //Adiciona a requisição á fila de requisições
         fila.add(req);
+    }
+
+    public void saveServer(String ip){
+        SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", MODE_PRIVATE);
+        SharedPreferences.Editor mEditor = mSharedPreferences.edit();
+        mEditor.putString("servidor", ip);
+        mEditor.apply();
+    }
+
+    public String getServer(){
+        SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", MODE_PRIVATE);
+        String ip = mSharedPreferences.getString("servidor", " ");
+        return ip;
     }
 }

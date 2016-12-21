@@ -15,8 +15,8 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:ems="10"
-        android:id="@+id/editName"
-        android:hint="192.168.0.100"
+        android:id="@+id/txvServer"
+        android:hint=""
         android:layout_below="@+id/textViewConfig2"/>
 
     <Button
@@ -25,8 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20px"
         android:layout_marginBottom="16px"
-        android:layout_below="@+id/editName"
+        android:layout_below="@+id/txvServer"
         android:background="@color/colorConfirm"
-        android:id="@+id/btnConfig" />
+        android:id="@+id/btnAlterar" />
 
 </RelativeLayout>
