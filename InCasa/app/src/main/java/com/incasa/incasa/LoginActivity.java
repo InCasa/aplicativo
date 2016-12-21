@@ -52,8 +52,7 @@ public class LoginActivity extends Activity {
 
         Button btnCadastro = (Button) findViewById(R.id.btn_cadastro);
         Button btnLogin = (Button) findViewById(R.id.btn_login);
-
-
+        Button btnServer = (Button) findViewById(R.id.btn_server);
 
         btnCadastro.setOnClickListener(new OnClickListener() {
             @Override
@@ -68,12 +67,12 @@ public class LoginActivity extends Activity {
             public void onClick(View v) {
                 login = input_loginL.getText().toString();
                 senha = input_passwordL.getText().toString();
-                if(TextUtils.isEmpty(login) || TextUtils.isEmpty(senha)) {
-                    if(TextUtils.isEmpty(login)) {
+                if (TextUtils.isEmpty(login) || TextUtils.isEmpty(senha)) {
+                    if (TextUtils.isEmpty(login)) {
                         input_loginL.setError("Preencha o campo login");
                         return;
                     }
-                    if(TextUtils.isEmpty(senha)) {
+                    if (TextUtils.isEmpty(senha)) {
                         input_passwordL.setError("Preencha o campo senha");
                         return;
                     }
@@ -83,6 +82,22 @@ public class LoginActivity extends Activity {
             }
         });
 
+        btnServer.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(LoginActivity.this, ServerActivity.class);
+                startActivity(it);
+            }
+        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     public void Login() {

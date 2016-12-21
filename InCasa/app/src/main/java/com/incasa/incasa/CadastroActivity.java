@@ -77,6 +77,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         Button btnCadastrar = (Button) findViewById(R.id.btn_cadastrar);
         Button btnCancelar = (Button) findViewById(R.id.btn_cancelar);
+        Button btnServer = (Button) findViewById(R.id.btn_server);
 
         btnCadastrar.setOnClickListener(new OnClickListener() {
             @Override
@@ -138,6 +139,21 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
 
+        btnServer.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(CadastroActivity.this, ServerActivity.class);
+                startActivity(it);
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     public void Cadastro(JSONObject json) {

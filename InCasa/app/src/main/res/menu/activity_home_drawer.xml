@@ -22,7 +22,10 @@
             android:id="@+id/nav_admin"
             android:icon="@drawable/ic_account_circle_black_48dp"
             android:title="Administrador" />
-
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_exit_to_app_black_48dp"
+            android:title="Sair" />
     </group>
 
 </menu>

@@ -31,8 +31,6 @@ import model.User;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String URL = "http://httpbin.org/get";
-
     private static final String URLTEMPERATURA = "http://192.168.0.100/backend/temperaturaValor";
     private static final String URLUMIDADE = "http://192.168.0.100/backend/umidadeValor";
 
@@ -41,8 +39,6 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         exibeTelaPrincipalOuSolicitaLogin();
-
-        finish();
 
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -126,6 +122,9 @@ public class HomeActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_admin) {
             Intent intent = new Intent(this, AdminActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.nav_logout) {
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
 
