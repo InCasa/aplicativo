@@ -1,5 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <TextView
+        android:text="Endereço Ip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig1"
+        android:layout_below="@+id/editSwitch" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:maxLength="15"
+        android:ems="10"
+        android:id="@+id/editIP"
+        android:hint="192.168.0.102"
+        android:layout_below="@+id/textViewConfig1" />
+
+    <TextView
+        android:text="Endereço MAC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig2"
+        android:layout_below="@+id/editIP" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:maxLength="17"
+        android:ems="17"
+        android:id="@+id/editMac"
+        android:hint="0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED"
+        android:layout_below="@+id/textViewConfig2"/>
+
+    <TextView
+        android:text="Gateway"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig3"
+        android:layout_below="@+id/editMac" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="15"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/editGateway"
+        android:hint="192.168.0.1"
+        android:layout_below="@+id/textViewConfig3"/>
+
+    <TextView
+        android:text="Máscara"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig4"
+        android:layout_below="@+id/editGateway"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="15"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/editMask"
+        android:hint="255.255.255.0"
+        android:layout_below="@+id/textViewConfig4"/>
+
+    <TextView
+        android:text="Porta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig5"
+        android:layout_below="@+id/editMask"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="5"
+        android:inputType="number"
+        android:ems="5"
+        android:id="@+id/editPorta"
+        android:hint="80"
+        android:layout_below="@+id/textViewConfig5"/>
+
+    <TextView
+        android:text="Pino Sensor de Temperatura e Umidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig6"
+        android:layout_below="@+id/editPorta"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="2"
+        android:inputType="text"
+        android:ems="2"
+        android:id="@+id/editPinoTemperatura"
+        android:hint="5"
+        android:layout_below="@+id/textViewConfig6"/>
+
+    <TextView
+        android:text="Pino do Réle 1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig7"
+        android:layout_below="@+id/editPinoTemperatura"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="2"
+        android:inputType="text"
+        android:ems="2"
+        android:id="@+id/editPinoRele1"
+        android:hint="7"
+        android:layout_below="@+id/textViewConfig7"/>
+
+    <TextView
+        android:text="Pino do Réle 2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig8"
+        android:layout_below="@+id/editPinoRele1"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="2"
+        android:inputType="text"
+        android:ems="2"
+        android:id="@+id/editPinoRele2"
+        android:hint="8"
+        android:layout_below="@+id/textViewConfig8"/>
+
+    <TextView
+        android:text="Pino do Réle 3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig9"
+        android:layout_below="@+id/editPinoRele2"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="2"
+        android:inputType="text"
+        android:ems="2"
+        android:id="@+id/editPinoRele3"
+        android:hint="9"
+        android:layout_below="@+id/textViewConfig9"/>
+
+    <TextView
+        android:text="Pino do Réle 4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig10"
+        android:layout_below="@+id/editPinoRele3"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="2"
+        android:inputType="text"
+        android:ems="2"
+        android:id="@+id/editPinoRele4"
+        android:hint="10"
+        android:layout_below="@+id/textViewConfig10"/>
+
+    <TextView
+        android:text="Pino do Sensor de Luminosidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig11"
+        android:layout_below="@+id/editPinoRele4"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="2"
+        android:inputType="text"
+        android:ems="2"
+        android:id="@+id/editPinoLuminosidade"
+        android:hint="A0"
+        android:layout_below="@+id/textViewConfig11"/>
+
+    <TextView
+        android:text="Pino do Sensor de Presença"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewConfig12"
+        android:layout_below="@+id/editPinoLuminosidade"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="2"
+        android:inputType="text"
+        android:ems="2"
+        android:id="@+id/editPinoPresenca"
+        android:hint="6"
+        android:layout_below="@+id/textViewConfig12"/>
+
+    <Button
+        android:text="Salvar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="16px"
+        android:layout_below="@+id/editPinoPresenca"
+        android:background="@color/colorConfirm"
+        android:id="@+id/btnArduinoSalvar" />
+
+    <Switch
+        android:text="Editar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editSwitch"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        />
+
 </RelativeLayout>
+
+</ScrollView>

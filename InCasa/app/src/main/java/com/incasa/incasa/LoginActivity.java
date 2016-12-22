@@ -117,8 +117,6 @@ public class LoginActivity extends Activity {
                     //Adiciona login e senha na instancia
                     user.setLogin(login);
                     user.setSenha(senha);
-                    Log.i("Login do Usuario: ",  user.getLogin());
-                    Log.i("Login do Senha: ",  user.getSenha());
                     Intent it = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(it);
                     finish();
@@ -130,7 +128,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Context context = getApplicationContext();
-                CharSequence text = "Login ou Senha incorretos: ";
+                CharSequence text = "Login ou Senha incorretos";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
