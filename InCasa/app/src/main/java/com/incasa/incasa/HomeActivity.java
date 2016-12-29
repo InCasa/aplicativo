@@ -3,6 +3,8 @@ package com.incasa.incasa;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,6 +27,9 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import model.User;
 
@@ -173,8 +179,20 @@ public class HomeActivity extends AppCompatActivity
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> headers = new HashMap<String, String>();
+                // add headers <key,value>
+                User user = User.getInstancia();
+                String auth = new String(Base64.encode((user.getLogin() + ":" + user.getSenha()).getBytes(), Base64.DEFAULT));
 
+                headers.put("Authorization ", " Basic " + auth);
+                Log.d("Application started", String.valueOf(headers));
+                return headers;
+            }
+
+        };
         //fila de requisições
         RequestQueue fila = Volley.newRequestQueue(this);
 
@@ -217,7 +235,20 @@ public class HomeActivity extends AppCompatActivity
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> headers = new HashMap<String, String>();
+                // add headers <key,value>
+                User user = User.getInstancia();
+                String auth = new String(Base64.encode((user.getLogin() + ":" + user.getSenha()).getBytes(), Base64.DEFAULT));
+
+                headers.put("Authorization ", " Basic " + auth);
+                Log.d("Application started", String.valueOf(headers));
+                return headers;
+            }
+
+        };
 
         //fila de requisições
         RequestQueue fila = Volley.newRequestQueue(this);
