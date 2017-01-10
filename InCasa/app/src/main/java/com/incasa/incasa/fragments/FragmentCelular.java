@@ -47,6 +47,7 @@ public class FragmentCelular extends Fragment {
         final EditText macAppField = (EditText) getView().findViewById(R.id.editAppMac);
         final EditText nameAppField = (EditText) getView().findViewById(R.id.editAppName);
         Button btnAppSalvar = (Button) getView().findViewById(R.id.btnAppSalvar);
+        Button btnCloneMac = (Button) getView().findViewById(R.id.btnCloneMAC);
 
         SharedPreferences mSharedPreferences = this.getActivity().getSharedPreferences("ServerAdress",0);
         String ip = mSharedPreferences.getString("servidor", null);
@@ -55,14 +56,20 @@ public class FragmentCelular extends Fragment {
         final String URLGET = "http://"+ip+"/backend/aplicativo/1";
         final String URLUPDATE = "http://"+ip+"/backend/aplicativo/update/";
 
-
-        Aplicativo app = Aplicativo.getInstancia();
         GetConfig(URLGET);
 
+        //seta as informações do objeto nos editText
+        Aplicativo app = Aplicativo.getInstancia();
         macAppField.setText(app.getMac());
         nameAppField.setText(app.getNome());
 
-        macAppField.setText(getMacAddr());
+
+        btnCloneMac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                macAppField.setText(getMacAddr());
+            }
+        });
 
         btnAppSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,9 +78,6 @@ public class FragmentCelular extends Fragment {
 
                 String nome = nameAppField.getText().toString();
                 String mac = macAppField.getText().toString();
-
-                //necessario criar logica para diferenciar entre atualização das informações e criação de uma nova,
-                // um metodo de update para a rota de updade do banco de dados
 
                 JSONObject jsonBody = new JSONObject();
                 try {
@@ -87,7 +91,8 @@ public class FragmentCelular extends Fragment {
                     e.printStackTrace();
                 }
 
-                SaveConfig(jsonBody, URLCADASTRO);
+                //SaveConfig(jsonBody, URLCADASTRO);
+                UpdateConfig(jsonBody, URLUPDATE);
 
             }
         });
@@ -125,12 +130,12 @@ public class FragmentCelular extends Fragment {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URLCADASTRO, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getActivity(), "Configuração Celular: Sucesso!" ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Configuração Celular: Configuração salva com Sucesso !" ,Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "Configuração Celular: Erro!" ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Configuração Celular: Erro ao salvar a configuração !" ,Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -196,16 +201,19 @@ public class FragmentCelular extends Fragment {
         fila.add(req);
     }
 
-    public void UpdateConfig(JSONObject json, String URLCADASTRO) {
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URLCADASTRO, json, new Response.Listener<JSONObject>() {
+    public void UpdateConfig(JSONObject json, String URLUPDATE) {
+        final Aplicativo app = Aplicativo.getInstancia();
+        URLUPDATE = URLUPDATE + app.getIdAplicativo();
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, URLUPDATE, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getActivity(), "Configuração Celular: Sucesso!" ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Configuração Celular: Atualizado com sucesso !" ,Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "Configuração Celular: Erro!" ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Configuração Celular: Erro na atualização !" ,Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

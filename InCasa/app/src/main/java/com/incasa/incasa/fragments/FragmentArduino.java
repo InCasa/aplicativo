@@ -1,10 +1,7 @@
 package com.incasa.incasa.fragments;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.util.Log;
@@ -13,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -23,8 +19,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.incasa.incasa.CadastroActivity;
-import com.incasa.incasa.LoginActivity;
 import com.incasa.incasa.R;
 
 import org.json.JSONException;
@@ -61,8 +55,6 @@ public class FragmentArduino extends Fragment {
         final EditText luminosidadeField = (EditText) getView().findViewById(R.id.editPinoLuminosidade);
         final EditText presencaField = (EditText) getView().findViewById(R.id.editPinoPresenca);
 
-        Switch editar  = (Switch) getView().findViewById(R.id.editSwitch);
-
         Button btnSalvar = (Button) getView().findViewById(R.id.btnArduinoSalvar);
 
         SharedPreferences mSharedPreferences = this.getActivity().getSharedPreferences("ServerAdress",0);
@@ -73,9 +65,8 @@ public class FragmentArduino extends Fragment {
 
         GetConfig(URLGET);
 
+        //seta as informações do objeto nos editText
         final Arduino arduino = Arduino.getInstancia();
-        Log.i(arduino.getPinoPresenca(), "Presenca do objeto");
-        Log.i(arduino.getPinoLDR(), "LDR do objeto");
         ip_arduino.setText(arduino.getIp());
         macField.setText(arduino.getMac());
         gatewayField.setText(arduino.getGateway());
@@ -105,8 +96,6 @@ public class FragmentArduino extends Fragment {
                 String luminosidade = luminosidadeField.getText().toString();
                 String presenca = presencaField.getText().toString();
 
-                //necessario criar logica para diferenciar entre atualização das informações e criação de uma nova,
-                // um metodo de update para a rota de updade do banco de dados
 
                 JSONObject jsonBody = new JSONObject();
                 try {
@@ -147,7 +136,8 @@ public class FragmentArduino extends Fragment {
                     e.printStackTrace();
                 }
 
-                SaveConfig(jsonBody, URLCADASTRO);
+                //SaveConfig(jsonBody, URLCADASTRO);
+                UpdateConfig(jsonBody, URLUPDATE);
 
             }
         });
@@ -157,12 +147,12 @@ public class FragmentArduino extends Fragment {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URLCADASTRO, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getActivity(), "Configuração Arduino: Sucesso!" ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Configuração Arduino: Configuração salva com Sucesso !" ,Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "Configuração Arduino: Erro!" ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Configuração Arduino: Erro ao salvar a configuração !" ,Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -194,10 +184,8 @@ public class FragmentArduino extends Fragment {
                 Arduino arduino = Arduino.getInstancia();
                 //adiciona as informações no objeto arduino
                 try {
-                    int id = response.getInt("id");
-                    String ip  = response.getString("ip");
-                    arduino.setIdArduino(id);
-                    arduino.setIp(ip);
+                    arduino.setIdArduino(response.getInt("id"));
+                    arduino.setIp(response.getString("ip"));
                     arduino.setMac(response.getString("mac"));
                     arduino.setMask(response.getString("mask"));
                     arduino.setGateway(response.getString("gateway"));
@@ -244,16 +232,19 @@ public class FragmentArduino extends Fragment {
         fila.add(req);
     }
 
-    public void UpdateConfig(JSONObject json, String URLCADASTRO) {
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URLCADASTRO, json, new Response.Listener<JSONObject>() {
+    public void UpdateConfig(JSONObject json, String URLUPDATE) {
+        final Arduino arduino = Arduino.getInstancia();
+        URLUPDATE = URLUPDATE + arduino.getIdArduino();
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, URLUPDATE, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getActivity(), "Configuração Arduino: Sucesso!" ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Configuração Arduino: Atualizado com sucesso !" ,Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "Configuração Arduino: Erro!" ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Configuração Arduino: Erro na atualização !" ,Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

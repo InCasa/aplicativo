@@ -11,8 +11,7 @@
         android:text="Endereço Ip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewConfig1"
-        android:layout_below="@+id/editSwitch" />
+        android:id="@+id/textViewConfig1" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -220,16 +219,6 @@
         android:layout_below="@+id/editPinoPresenca"
         android:background="@color/colorConfirm"
         android:id="@+id/btnArduinoSalvar" />
-
-    <Switch
-        android:text="Editar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editSwitch"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        />
 
 </RelativeLayout>
 
