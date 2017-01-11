@@ -10,6 +10,21 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:text="Nome:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewAdm0" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Nome"
+            android:ems="10"
+            android:id="@+id/userNome"
+            android:layout_weight="1" />
+
+        <TextView
             android:text="Login:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,7 +36,7 @@
             android:inputType="text"
             android:text="Login"
             android:ems="10"
-            android:id="@+id/editLogin1"
+            android:id="@+id/userLogin"
             android:layout_weight="1" />
 
         <TextView
@@ -36,7 +51,7 @@
             android:inputType="textPassword"
             android:text="123456"
             android:ems="10"
-            android:id="@+id/editSenhaAnt"
+            android:id="@+id/userSenhaAnt"
             android:layout_weight="1" />
 
         <TextView
@@ -51,7 +66,7 @@
             android:inputType="textPassword"
             android:text="123456"
             android:ems="10"
-            android:id="@+id/editSenhaNov"
+            android:id="@+id/userSenhaNov"
             android:layout_weight="1" />
 
         <TextView
@@ -66,7 +81,7 @@
             android:inputType="textPassword"
             android:text="123456"
             android:ems="10"
-            android:id="@+id/editSenhaNovC"
+            android:id="@+id/userSenhaC"
             android:layout_weight="1" />
 
         <Button
