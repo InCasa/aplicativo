@@ -58,7 +58,7 @@ public class AdminActivity extends AppCompatActivity {
         SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", MODE_PRIVATE);
         String ip = mSharedPreferences.getString("servidor", " ");
 
-        String URLUSER = "http://"+ip+"/backend/GetUser";
+        String URLUSER = "http://"+ip+"/backend/getUser";
 
         JSONObject jsonBody = new JSONObject();
         User user = User.getInstancia();
@@ -68,6 +68,7 @@ public class AdminActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         getUser(jsonBody, URLUSER);
 
         userNome.setText(user.getNome());
@@ -146,6 +147,10 @@ public class AdminActivity extends AppCompatActivity {
                 }
 
                 atualizar(jsonBody2, PUTUSER);
+
+                Intent it = new Intent(this, LoginActivity.class);
+                startActivity(it);
+                this.finish();
             } else {
                 Context context = getApplicationContext();
                 CharSequence text = "As senhas devem ser iguais";
@@ -245,7 +250,59 @@ public class AdminActivity extends AppCompatActivity {
                 String auth = new String(Base64.encode((user.getLogin() + ":" + user.getSenha()).getBytes(), Base64.DEFAULT));
 
                 headers.put("Authorization ", " Basic " + auth);
-                Log.d("Application started", String.valueOf(headers));
+                return headers;
+            }
+
+        };
+        //fila de requisições
+        RequestQueue fila = Volley.newRequestQueue(this);
+
+        //Adiciona a requisição á fila de requisições
+        fila.add(req);
+
+    }
+
+    public void getUserInfo(JSONObject json, String URLUSERINFO) {
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLUSERINFO, json, new Response.Listener<JSONObject>() {
+            //Em caso de sucesso
+            @Override
+            public void onResponse(JSONObject response) {
+                Context context = getApplicationContext();
+                CharSequence text = "Usuário: Sucesso !";
+                int duration = Toast.LENGTH_SHORT;
+
+                User user = User.getInstancia();
+                try {
+                    user.setNome(response.getString("nome"));
+                    user.setId(response.getString("id"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        }, new Response.ErrorListener() {
+            //Em caso de erro
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Context context = getApplicationContext();
+                CharSequence text = "Usuário: Falha !";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> headers = new HashMap<String, String>();
+                // add headers <key,value>
+                User user = User.getInstancia();
+                String auth = new String(Base64.encode((user.getLogin() + ":" + user.getSenha()).getBytes(), Base64.DEFAULT));
+
+                headers.put("Authorization ", " Basic " + auth);
                 return headers;
             }
 

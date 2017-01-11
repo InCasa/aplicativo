@@ -18,6 +18,14 @@ public class User {
         User.id = id;
     }
 
+    public static String getNome() {
+        return nome;
+    }
+
+    public static void setNome(String nome) {
+        User.nome = nome;
+    }
+
     public static String getLogin() {
         return login;
     }
@@ -42,11 +50,4 @@ public class User {
         return user;
     }
 
-    public static String getNome() {
-        return nome;
-    }
-
-    public static void setNome(String nome) {
-        User.nome = nome;
-    }
 }
