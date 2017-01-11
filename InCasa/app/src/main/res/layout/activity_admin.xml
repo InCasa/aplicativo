@@ -19,7 +19,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Nome"
             android:ems="10"
             android:id="@+id/userNome"
             android:layout_weight="1" />
@@ -34,7 +33,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Login"
             android:ems="10"
             android:id="@+id/userLogin"
             android:layout_weight="1" />
@@ -49,7 +47,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:text="123456"
             android:ems="10"
             android:id="@+id/userSenhaAnt"
             android:layout_weight="1" />
@@ -64,7 +61,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:text="123456"
             android:ems="10"
             android:id="@+id/userSenhaNov"
             android:layout_weight="1" />
@@ -79,7 +75,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:text="123456"
             android:ems="10"
             android:id="@+id/userSenhaC"
             android:layout_weight="1" />

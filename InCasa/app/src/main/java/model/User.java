@@ -4,6 +4,7 @@ public class User {
     private static String id;
     private static String login;
     private static String senha;
+    private static String nome;
     private static User user;
 
     private User() {
@@ -39,5 +40,13 @@ public class User {
         }
 
         return user;
+    }
+
+    public static String getNome() {
+        return nome;
+    }
+
+    public static void setNome(String nome) {
+        User.nome = nome;
     }
 }

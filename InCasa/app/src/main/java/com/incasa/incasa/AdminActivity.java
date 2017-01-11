@@ -2,6 +2,7 @@ package com.incasa.incasa;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -38,11 +39,6 @@ public class AdminActivity extends AppCompatActivity {
     EditText userSenhaNov;
     EditText userSenhaC;
 
-    private final String PUTUSER = "http://192.168.0.100/backend/user/update/";
-    private final String GETID = "http://192.168.0.100/backend/userID";
-
-    String id = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +54,24 @@ public class AdminActivity extends AppCompatActivity {
         userSenhaC = (EditText) findViewById(R.id.userSenhaC);
 
         Button submitUser = (Button) findViewById(R.id.btnAdm);
+
+        SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", MODE_PRIVATE);
+        String ip = mSharedPreferences.getString("servidor", " ");
+
+        String URLUSER = "http://"+ip+"/backend/GetUser";
+
+        JSONObject jsonBody = new JSONObject();
+        User user = User.getInstancia();
+        try {
+            jsonBody.put("login", user.getLogin());
+            jsonBody.put("senha", user.getSenha());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        getUser(jsonBody, URLUSER);
+
+        userNome.setText(user.getNome());
+        userLogin.setText(user.getLogin());
 
         submitUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +97,11 @@ public class AdminActivity extends AppCompatActivity {
         String senhaAnt = userSenhaAnt.getText().toString();
         String senhaNov = userSenhaNov.getText().toString();
         String senhaC = userSenhaC.getText().toString();
+
+        SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", MODE_PRIVATE);
+        String ip = mSharedPreferences.getString("servidor", " ");
+
+        String PUTUSER = "http://"+ip+"/backend/user/update/";
 
         if(TextUtils.isEmpty(nome) || TextUtils.isEmpty(login) || TextUtils.isEmpty(senhaAnt) || TextUtils.isEmpty(senhaNov) || TextUtils.isEmpty(senhaC)) {
             if(TextUtils.isEmpty(nome)) {
@@ -116,7 +135,6 @@ public class AdminActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                getUserID(jsonBody);
 
                 JSONObject jsonBody2 = new JSONObject();
                 try {
@@ -127,7 +145,7 @@ public class AdminActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                atualizar(jsonBody2);
+                atualizar(jsonBody2, PUTUSER);
             } else {
                 Context context = getApplicationContext();
                 CharSequence text = "As senhas devem ser iguais";
@@ -139,13 +157,14 @@ public class AdminActivity extends AppCompatActivity {
         }
     }
 
-    public void atualizar(JSONObject json) {
+    public void atualizar(JSONObject json, String PUTUSER) {
         User user = User.getInstancia();
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, PUTUSER+""+user.getId(), json, new Response.Listener<JSONObject>() {
+        PUTUSER = PUTUSER + user.getId();
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, PUTUSER, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Context context = getApplicationContext();
-                CharSequence text = "Dados atualizados";
+                CharSequence text = "Administrador: Dados atualizados com sucesso !";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
@@ -158,7 +177,7 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Context context = getApplicationContext();
-                CharSequence text = "Erro na atualização";
+                CharSequence text = "Administrador: Falha ao atualizar !";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
@@ -185,22 +204,33 @@ public class AdminActivity extends AppCompatActivity {
         fila.add(req);
     }
 
-    public void getUserID(JSONObject json) {
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, GETID, json, new Response.Listener<JSONObject>() {
+    public void getUser(JSONObject json, String URLUSER) {
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URLUSER, json, new Response.Listener<JSONObject>() {
+            //Em caso de sucesso
             @Override
             public void onResponse(JSONObject response) {
+                Context context = getApplicationContext();
+                CharSequence text = "Usuário: Sucesso !";
+                int duration = Toast.LENGTH_SHORT;
+
+                User user = User.getInstancia();
                 try {
-                    User user = User.getInstancia();
+                    user.setNome(response.getString("nome"));
                     user.setId(response.getString("id"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
         }, new Response.ErrorListener() {
+            //Em caso de erro
             @Override
             public void onErrorResponse(VolleyError error) {
                 Context context = getApplicationContext();
-                CharSequence text = "Erro na busca do id";
+                CharSequence text = "Usuário: Falha !";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
@@ -215,15 +245,18 @@ public class AdminActivity extends AppCompatActivity {
                 String auth = new String(Base64.encode((user.getLogin() + ":" + user.getSenha()).getBytes(), Base64.DEFAULT));
 
                 headers.put("Authorization ", " Basic " + auth);
+                Log.d("Application started", String.valueOf(headers));
                 return headers;
             }
+
         };
-        // Add the request to the RequestQueue.
         //fila de requisições
         RequestQueue fila = Volley.newRequestQueue(this);
 
         //Adiciona a requisição á fila de requisições
         fila.add(req);
+
     }
+
 
 }
