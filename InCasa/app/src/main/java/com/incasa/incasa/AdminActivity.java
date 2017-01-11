@@ -140,7 +140,8 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     public void atualizar(JSONObject json) {
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, PUTUSER+""+id, json, new Response.Listener<JSONObject>() {
+        User user = User.getInstancia();
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, PUTUSER+""+user.getId(), json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Context context = getApplicationContext();
@@ -189,7 +190,8 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    id = response.getString("id");
+                    User user = User.getInstancia();
+                    user.setId(response.getString("id"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

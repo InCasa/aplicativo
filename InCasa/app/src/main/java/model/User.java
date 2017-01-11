@@ -1,11 +1,20 @@
 package model;
 
 public class User {
+    private static String id;
     private static String login;
     private static String senha;
     private static User user;
 
     private User() {
+    }
+
+    public static String getId() {
+        return id;
+    }
+
+    public static void setId(String id) {
+        User.id = id;
     }
 
     public static String getLogin() {
