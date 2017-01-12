@@ -1,7 +1,7 @@
 package com.incasa.incasa;
 
 import android.content.Context;
-import android.support.v4.app.NavUtils;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -10,18 +10,12 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.util.Base64;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,9 +33,7 @@ import org.json.JSONObject;
 import model.User;
 
 public class VozActivity extends AppCompatActivity {
-
-    private final String URLCOMANDO = "http://192.168.0.100/backend/comando";
-
+    String ip;
     private TextView txtSpeechInput;
     private View btnSpeak;
     private final int REQ_CODE_SPEECH_INPUT = 100;
@@ -57,6 +49,9 @@ public class VozActivity extends AppCompatActivity {
 
         txtSpeechInput = (TextView) findViewById(R.id.txtSpeechInput);
         btnSpeak = findViewById(R.id.btnSpeak);
+
+        SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", 0);
+        this.ip = mSharedPreferences.getString("servidor", " ");
 
         promptSpeechInput();
 
@@ -120,7 +115,8 @@ public class VozActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    enviaComando(jsonBody);
+                    String URLCOMANDO = "http://"+ip+"/backend/comando";
+                    enviaComando(jsonBody, URLCOMANDO);
 
                 }
                 break;
@@ -129,7 +125,7 @@ public class VozActivity extends AppCompatActivity {
         }
     }
 
-    public void enviaComando(JSONObject json) {
+    public void enviaComando(JSONObject json, String URLCOMANDO) {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URLCOMANDO, json, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override

@@ -109,7 +109,7 @@
         android:layout_below="@+id/textViewConfig6"/>
 
     <TextView
-        android:text="Pino do Réle 1"
+        android:text="Pino do Relê 1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewConfig7"
@@ -126,7 +126,7 @@
         android:layout_below="@+id/textViewConfig7"/>
 
     <TextView
-        android:text="Pino do Réle 2"
+        android:text="Pino do Relê 2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewConfig8"
@@ -143,7 +143,7 @@
         android:layout_below="@+id/textViewConfig8"/>
 
     <TextView
-        android:text="Pino do Réle 3"
+        android:text="Pino do Relê 3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewConfig9"
@@ -160,7 +160,7 @@
         android:layout_below="@+id/textViewConfig9"/>
 
     <TextView
-        android:text="Pino do Réle 4"
+        android:text="Pino do Relê 4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewConfig10"

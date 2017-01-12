@@ -7,10 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -38,6 +36,7 @@ public class AdminActivity extends AppCompatActivity {
     EditText userSenhaAnt;
     EditText userSenhaNov;
     EditText userSenhaC;
+    String ip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +54,8 @@ public class AdminActivity extends AppCompatActivity {
 
         Button submitUser = (Button) findViewById(R.id.btnAdm);
 
-        SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", MODE_PRIVATE);
-        String ip = mSharedPreferences.getString("servidor", " ");
+        SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", 0);
+        this.ip = mSharedPreferences.getString("servidor", " ");
 
         String URLUSER = "http://"+ip+"/backend/getUser";
 
@@ -98,9 +97,6 @@ public class AdminActivity extends AppCompatActivity {
         String senhaAnt = userSenhaAnt.getText().toString();
         String senhaNov = userSenhaNov.getText().toString();
         String senhaC = userSenhaC.getText().toString();
-
-        SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", MODE_PRIVATE);
-        String ip = mSharedPreferences.getString("servidor", " ");
 
         String PUTUSER = "http://"+ip+"/backend/user/update/";
 
@@ -229,6 +225,7 @@ public class AdminActivity extends AppCompatActivity {
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+
             }
         }, new Response.ErrorListener() {
             //Em caso de erro

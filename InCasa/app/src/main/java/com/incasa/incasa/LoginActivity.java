@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -37,10 +35,9 @@ import model.User;
 
 public class LoginActivity extends Activity {
 
-    private static final String URLLOGIN = "http://192.168.0.100/backend/userLogin";
-
     String login = "";
     String senha = "";
+    String ip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +50,10 @@ public class LoginActivity extends Activity {
         Button btnCadastro = (Button) findViewById(R.id.btn_cadastro);
         Button btnLogin = (Button) findViewById(R.id.btn_login);
         Button btnServer = (Button) findViewById(R.id.btn_server);
+
+        SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", 0);
+        this.ip = mSharedPreferences.getString("servidor", " ");
+        final String URLLOGIN = "http://"+ip+"/backend/userLogin";
 
         btnCadastro.setOnClickListener(new OnClickListener() {
             @Override
@@ -77,7 +78,7 @@ public class LoginActivity extends Activity {
                         return;
                     }
                 } else {
-                    Login();
+                    Login(URLLOGIN);
                 }
             }
         });
@@ -100,7 +101,7 @@ public class LoginActivity extends Activity {
         startActivity(intent);
     }
 
-    public void Login() {
+    public void Login(String URLLOGIN) {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URLLOGIN, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override

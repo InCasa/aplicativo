@@ -3,6 +3,7 @@ package com.incasa.incasa.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -79,20 +80,30 @@ public class FragmentCelular extends Fragment {
                 String nome = nameAppField.getText().toString();
                 String mac = macAppField.getText().toString();
 
-                JSONObject jsonBody = new JSONObject();
-                try {
-                    jsonBody.put("mac", mac);
-                    app.setMac(mac);
+                if(TextUtils.isEmpty(nome) || TextUtils.isEmpty(mac)){
+                    if(TextUtils.isEmpty(nome)){
+                        nameAppField.setError("Preencha o campo nome");
 
-                    jsonBody.put("nome", nome);
-                    app.setNome(nome);
+                    }if(TextUtils.isEmpty(mac)){
+                        macAppField.setError("Preencha o campo MAC");
+                    }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                }else{
+                    JSONObject jsonBody = new JSONObject();
+                    try {
+                        jsonBody.put("mac", mac);
+                        app.setMac(mac);
+
+                        jsonBody.put("nome", nome);
+                        app.setNome(nome);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    //SaveConfig(jsonBody, URLCADASTRO);
+                    UpdateConfig(jsonBody, URLUPDATE);
                 }
-
-                //SaveConfig(jsonBody, URLCADASTRO);
-                UpdateConfig(jsonBody, URLUPDATE);
 
             }
         });

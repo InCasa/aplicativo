@@ -3,6 +3,7 @@ package com.incasa.incasa.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,7 +59,7 @@ public class FragmentArduino extends Fragment {
         Button btnSalvar = (Button) getView().findViewById(R.id.btnArduinoSalvar);
 
         SharedPreferences mSharedPreferences = this.getActivity().getSharedPreferences("ServerAdress",0);
-        String ip = mSharedPreferences.getString("servidor", null);
+        final String ip = mSharedPreferences.getString("servidor", null);
         final String URLCADASTRO = "http://"+ip+"/backend/arduino";
         final String URLGET = "http://"+ip+"/backend/arduino/1";
         final String URLUPDATE = "http://"+ip+"/backend/arduino/update/";
@@ -96,48 +97,99 @@ public class FragmentArduino extends Fragment {
                 String luminosidade = luminosidadeField.getText().toString();
                 String presenca = presencaField.getText().toString();
 
+                if(TextUtils.isEmpty(ipArduino) || TextUtils.isEmpty(mac) || TextUtils.isEmpty(gateway) || TextUtils.isEmpty(gateway) || TextUtils.isEmpty(mask) || TextUtils.isEmpty(porta) || TextUtils.isEmpty(temperatura)
+                        || TextUtils.isEmpty(rele1) || TextUtils.isEmpty(rele2) || TextUtils.isEmpty(rele3) || TextUtils.isEmpty(rele4) || TextUtils.isEmpty(luminosidade) || TextUtils.isEmpty(presenca)){
 
-                JSONObject jsonBody = new JSONObject();
-                try {
-                    jsonBody.put("ip", ipArduino);
-                    arduino.setIp(ipArduino);
+                    if(TextUtils.isEmpty(ipArduino)){
+                        ip_arduino.setError("Preencha o campo IP");
+                    }
 
-                    jsonBody.put("mac", mac);
-                    arduino.setMac(mac);
+                    if(TextUtils.isEmpty(mac)){
+                        macField.setError("Preencha o campo MAC");
+                    }
 
-                    jsonBody.put("gateway", gateway);
-                    arduino.setGateway(gateway);
+                    if(TextUtils.isEmpty(gateway)){
+                        gatewayField.setError("Preencha o campo Gateway");
+                    }
 
-                    jsonBody.put("mask", mask);
-                    arduino.setMask(mask);
+                    if(TextUtils.isEmpty(mask)){
+                        maskField.setError("Preencha o campo Máscara");
+                    }
 
-                    jsonBody.put("porta", porta);
-                    arduino.setPorta(porta);
+                    if(TextUtils.isEmpty(porta)){
+                        portaField.setError("Preencha o campo Porta");
+                    }
 
-                    jsonBody.put("PinoDHT", temperatura);
-                    arduino.setPinoDHT22(temperatura);
+                    if(TextUtils.isEmpty(temperatura)){
+                        temperaturaField.setError("Preencha o campo Pino Sensor de Temperatura e Umidade");
+                    }
 
-                    jsonBody.put("PinoRele1", rele1);
-                    arduino.setPinoRele1(rele1);
-                    jsonBody.put("PinoRele2", rele2);
-                    arduino.setPinoRele2(rele2);
-                    jsonBody.put("PinoRele3", rele3);
-                    arduino.setPinoRele3(rele3);
-                    jsonBody.put("PinoRele4", rele4);
-                    arduino.setPinoRele4(rele4);
+                    if(TextUtils.isEmpty(rele1)){
+                        rele1Field.setError("Preencha o campo Pino do relê 1");
+                    }
 
-                    jsonBody.put("PinoLDR", luminosidade);
-                    arduino.setPinoLDR(luminosidade);
+                    if(TextUtils.isEmpty(rele2)){
+                        rele2Field.setError("Preencha o campo Pino do relê 2");
+                    }
 
-                    jsonBody.put("PinoPresenca", presenca);
-                    arduino.setPinoPresenca(presenca);
+                    if(TextUtils.isEmpty(rele3)){
+                        rele3Field.setError("Preencha o campo Pino do relê 3");
+                    }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    if(TextUtils.isEmpty(rele4)){
+                        rele4Field.setError("Preencha o campo Pino do relê 4");
+                    }
+
+                    if(TextUtils.isEmpty(luminosidade)){
+                        luminosidadeField.setError("Preencha o campo Pino do Sensor de Luminosidade");
+                    }
+
+                    if(TextUtils.isEmpty(presenca)){
+                        presencaField.setError("Preencha o campo Pino do Sensor de Presença");
+                    }
+                }else {
+                    JSONObject jsonBody = new JSONObject();
+                    try {
+                        jsonBody.put("ip", ipArduino);
+                        arduino.setIp(ipArduino);
+
+                        jsonBody.put("mac", mac);
+                        arduino.setMac(mac);
+
+                        jsonBody.put("gateway", gateway);
+                        arduino.setGateway(gateway);
+
+                        jsonBody.put("mask", mask);
+                        arduino.setMask(mask);
+
+                        jsonBody.put("porta", porta);
+                        arduino.setPorta(porta);
+
+                        jsonBody.put("PinoDHT", temperatura);
+                        arduino.setPinoDHT22(temperatura);
+
+                        jsonBody.put("PinoRele1", rele1);
+                        arduino.setPinoRele1(rele1);
+                        jsonBody.put("PinoRele2", rele2);
+                        arduino.setPinoRele2(rele2);
+                        jsonBody.put("PinoRele3", rele3);
+                        arduino.setPinoRele3(rele3);
+                        jsonBody.put("PinoRele4", rele4);
+                        arduino.setPinoRele4(rele4);
+
+                        jsonBody.put("PinoLDR", luminosidade);
+                        arduino.setPinoLDR(luminosidade);
+
+                        jsonBody.put("PinoPresenca", presenca);
+                        arduino.setPinoPresenca(presenca);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    //SaveConfig(jsonBody, URLCADASTRO);
+                    UpdateConfig(jsonBody, URLUPDATE);
                 }
-
-                //SaveConfig(jsonBody, URLCADASTRO);
-                UpdateConfig(jsonBody, URLUPDATE);
 
             }
         });

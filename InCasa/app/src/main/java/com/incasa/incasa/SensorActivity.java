@@ -1,6 +1,7 @@
 package com.incasa.incasa;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -26,11 +27,8 @@ import java.util.Map;
 import model.User;
 
 public class SensorActivity extends AppCompatActivity {
+    String ip;
 
-    private final String URLTEMPERATURA = "http://192.168.0.100/backend/temperaturaValor";
-    private final String URLUMIDADE = "http://192.168.0.100/backend/umidadeValor";
-    private final String URLLUMINOSIDADE = "http://192.168.0.100/backend/luminosidadeValor";
-    private final String URLPRESENCA = "http://192.168.0.100/backend/presencaValor";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +38,18 @@ public class SensorActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        getTemperatura();
-        getUmidade();
-        getLuminosidade();
-        getPresenca();
+        SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", 0);
+        this.ip = mSharedPreferences.getString("servidor", " ");
+
+        final String URLTEMPERATURA = "http://"+ip+"/backend/temperaturaValor";
+        final String URLUMIDADE = "http://"+ip+"/backend/umidadeValor";
+        final String URLLUMINOSIDADE = "http://"+ip+"/backend/luminosidadeValor";
+        final String URLPRESENCA = "http://"+ip+"/backend/presencaValor";
+
+        getTemperatura(URLTEMPERATURA);
+        getUmidade(URLUMIDADE);
+        getLuminosidade(URLLUMINOSIDADE);
+        getPresenca(URLPRESENCA);
 
     }
 
@@ -56,7 +62,7 @@ public class SensorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void getTemperatura() {
+    public void getTemperatura(String URLTEMPERATURA) {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLTEMPERATURA, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override
@@ -113,7 +119,7 @@ public class SensorActivity extends AppCompatActivity {
 
     }
 
-    public void getUmidade() {
+    public void getUmidade(String URLUMIDADE) {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLUMIDADE, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override
@@ -168,7 +174,7 @@ public class SensorActivity extends AppCompatActivity {
         fila.add(req);
     }
 
-    public void getLuminosidade() {
+    public void getLuminosidade(String URLLUMINOSIDADE) {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLLUMINOSIDADE, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override
@@ -223,7 +229,7 @@ public class SensorActivity extends AppCompatActivity {
         fila.add(req);
     }
 
-    public void getPresenca() {
+    public void getPresenca(String URLPRESENCA) {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLPRESENCA, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override

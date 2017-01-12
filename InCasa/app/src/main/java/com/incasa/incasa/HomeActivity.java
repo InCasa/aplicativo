@@ -2,6 +2,7 @@ package com.incasa.incasa;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -37,8 +38,8 @@ import model.User;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String URLTEMPERATURA = "http://192.168.0.100/backend/temperaturaValor";
-    private static final String URLUMIDADE = "http://192.168.0.100/backend/umidadeValor";
+    String ip;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +59,14 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        getTemperatura();
-        getUmidade();
+        SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", 0);
+        this.ip = mSharedPreferences.getString("servidor", " ");
+
+        String URLTEMPERATURA = "http://"+ip+"/backend/temperaturaValor";
+        String URLUMIDADE = "http://"+ip+"/backend/umidadeValor";
+
+        getTemperatura(URLTEMPERATURA);
+        getUmidade(URLUMIDADE);
     }
 
     private void exibeTelaPrincipalOuSolicitaLogin() {
@@ -142,7 +149,7 @@ public class HomeActivity extends AppCompatActivity
 
 
 
-    public void getTemperatura() {
+    public void getTemperatura(String URLTEMPERATURA) {
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLTEMPERATURA, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
@@ -199,7 +206,7 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
-    public void getUmidade() {
+    public void getUmidade(String URLUMIDADE) {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLUMIDADE, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override

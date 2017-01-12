@@ -1,7 +1,7 @@
 package com.incasa.incasa;
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -29,18 +28,11 @@ import java.util.Map;
 import model.User;
 
 public class ReleActivity extends AppCompatActivity {
-
-    private final String URLRELE1 = "http://192.168.0.100/backend/releValor/1";
-    private final String URLRELE2 = "http://192.168.0.100/backend/releValor/2";
-    private final String URLRELE3 = "http://192.168.0.100/backend/releValor/3";
-    private final String URLRELE4 = "http://192.168.0.100/backend/releValor/4";
-
-    private final String URLPOSTRELE = "http://192.168.0.100/backend/releValor";
-
     boolean estado1;
     boolean estado2;
     boolean estado3;
     boolean estado4;
+    String ip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +42,20 @@ public class ReleActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        getRele1();
-        getRele2();
-        getRele3();
-        getRele4();
+        SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", 0);
+        this.ip = mSharedPreferences.getString("servidor", " ");
+
+        final String URLRELE1 = "http://"+ip+"/backend/releValor/1";
+        final String URLRELE2 = "http://"+ip+"/backend/releValor/2";
+        final String URLRELE3 = "http://"+ip+"/backend/releValor/3";
+        final String URLRELE4 = "http://"+ip+"/backend/releValor/4";
+
+        final String URLPOSTRELE = "http://"+ip+"/backend/releValor";
+
+        getRele1(URLRELE1);
+        getRele2(URLRELE2);
+        getRele3(URLRELE3);
+        getRele4(URLRELE4);
 
         Switch rele1 = (Switch) findViewById(R.id.switch1);
         Switch rele2 = (Switch) findViewById(R.id.switch2);
@@ -74,7 +76,7 @@ public class ReleActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        postRele(jsonBody);
+                        postRele(jsonBody, URLPOSTRELE);
                     } else {
                         JSONObject jsonBody = new JSONObject();
                         try {
@@ -83,7 +85,7 @@ public class ReleActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        postRele(jsonBody);
+                        postRele(jsonBody, URLPOSTRELE);
                     }
 
                 }
@@ -104,7 +106,7 @@ public class ReleActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        postRele(jsonBody);
+                        postRele(jsonBody, URLPOSTRELE);
                     } else {
                         JSONObject jsonBody = new JSONObject();
                         try {
@@ -113,7 +115,7 @@ public class ReleActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        postRele(jsonBody);
+                        postRele(jsonBody, URLPOSTRELE);
                     }
 
                 }
@@ -134,7 +136,7 @@ public class ReleActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        postRele(jsonBody);
+                        postRele(jsonBody, URLPOSTRELE);
                     } else {
                         JSONObject jsonBody = new JSONObject();
                         try {
@@ -143,7 +145,7 @@ public class ReleActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        postRele(jsonBody);
+                        postRele(jsonBody, URLPOSTRELE);
                     }
 
                 }
@@ -164,7 +166,7 @@ public class ReleActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        postRele(jsonBody);
+                        postRele(jsonBody, URLPOSTRELE);
                     } else {
                         JSONObject jsonBody = new JSONObject();
                         try {
@@ -173,7 +175,7 @@ public class ReleActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        postRele(jsonBody);
+                        postRele(jsonBody, URLPOSTRELE);
                     }
 
                 }
@@ -191,7 +193,7 @@ public class ReleActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void getRele1() {
+    public void getRele1(String URLRELE1) {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLRELE1, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override
@@ -248,7 +250,7 @@ public class ReleActivity extends AppCompatActivity {
         fila.add(req);
     }
 
-    public void getRele2() {
+    public void getRele2(String URLRELE2) {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLRELE2, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override
@@ -305,7 +307,7 @@ public class ReleActivity extends AppCompatActivity {
         fila.add(req);
     }
 
-    public void getRele3() {
+    public void getRele3(String URLRELE3) {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLRELE3, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override
@@ -361,7 +363,7 @@ public class ReleActivity extends AppCompatActivity {
         fila.add(req);
     }
 
-    public void getRele4() {
+    public void getRele4(String URLRELE4) {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLRELE4, null, new Response.Listener<JSONObject>() {
             //Em caso de sucesso
             @Override
@@ -418,7 +420,7 @@ public class ReleActivity extends AppCompatActivity {
         fila.add(req);
     }
 
-    public void postRele(JSONObject json) {
+    public void postRele(JSONObject json, String URLPOSTRELE) {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URLPOSTRELE, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
