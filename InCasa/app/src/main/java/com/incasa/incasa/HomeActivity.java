@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -67,6 +66,7 @@ public class HomeActivity extends AppCompatActivity
 
         getTemperatura(URLTEMPERATURA);
         getUmidade(URLUMIDADE);
+
     }
 
     private void exibeTelaPrincipalOuSolicitaLogin() {
@@ -178,7 +178,7 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onErrorResponse(VolleyError error) {
                 Context context = getApplicationContext();
-                CharSequence text = "Erro na requisição";
+                CharSequence text = "Temperatura: Erro na requisição !";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
@@ -191,9 +191,7 @@ public class HomeActivity extends AppCompatActivity
                 // add headers <key,value>
                 User user = User.getInstancia();
                 String auth = new String(Base64.encode((user.getLogin() + ":" + user.getSenha()).getBytes(), Base64.DEFAULT));
-
                 headers.put("Authorization ", " Basic " + auth);
-                Log.d("Application started", String.valueOf(headers));
                 return headers;
             }
 
@@ -234,7 +232,7 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onErrorResponse(VolleyError error) {
                 Context context = getApplicationContext();
-                CharSequence text = "Erro na requisição";
+                CharSequence text = "Umidade: Erro na requisição !";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
@@ -247,9 +245,7 @@ public class HomeActivity extends AppCompatActivity
                 // add headers <key,value>
                 User user = User.getInstancia();
                 String auth = new String(Base64.encode((user.getLogin() + ":" + user.getSenha()).getBytes(), Base64.DEFAULT));
-
                 headers.put("Authorization ", " Basic " + auth);
-                Log.d("Application started", String.valueOf(headers));
                 return headers;
             }
 

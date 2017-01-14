@@ -141,9 +141,7 @@ public class LoginActivity extends Activity {
                 Map<String,String> headers = new HashMap<String, String>();
                 // add headers <key,value>
                 String auth = new String(Base64.encode((login + ":" + senha).getBytes(), Base64.DEFAULT));
-
                 headers.put("Authorization ", " Basic " + auth);
-                Log.d("Application started", String.valueOf(headers));
                 return headers;
             }
 

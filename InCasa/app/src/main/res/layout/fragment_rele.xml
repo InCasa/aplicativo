@@ -19,7 +19,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Rele 1"
             android:ems="10"
             android:id="@+id/editNameRele1"
             android:layout_weight="1" />
@@ -34,7 +33,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Descrição Rele 1"
             android:ems="10"
             android:id="@+id/editDescRele1"
             android:layout_weight="1" />
@@ -49,7 +47,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Rele 2"
             android:ems="10"
             android:id="@+id/editNameRele2"
             android:layout_weight="1" />
@@ -64,7 +61,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Descrição Rele 2"
             android:ems="10"
             android:id="@+id/editDescRele2"
             android:layout_weight="1" />
@@ -79,7 +75,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Rele 3"
             android:ems="10"
             android:id="@+id/editNameRele3"
             android:layout_weight="1" />
@@ -94,7 +89,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Descrição Rele 3"
             android:ems="10"
             android:id="@+id/editDescRele3"
             android:layout_weight="1" />
@@ -109,7 +103,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Rele 4"
             android:ems="10"
             android:id="@+id/editNameRele4"
             android:layout_weight="1" />
@@ -124,20 +117,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Descrição Rele 4"
             android:ems="10"
             android:id="@+id/editDescRele4"
             android:layout_weight="1" />
 
         <Button
-            android:text="Alterar"
+            android:text="Salvar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20px"
             android:layout_marginBottom="16px"
             android:layout_below="@+id/editName"
             android:background="@color/colorConfirm"
-            android:id="@+id/btnConfig" />
+            android:id="@+id/btnReleSalvar" />
 
     </LinearLayout>
 

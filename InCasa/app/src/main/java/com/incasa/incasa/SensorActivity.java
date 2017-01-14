@@ -103,9 +103,7 @@ public class SensorActivity extends AppCompatActivity {
                 // add headers <key,value>
                 User user = User.getInstancia();
                 String auth = new String(Base64.encode((user.getLogin() + ":" + user.getSenha()).getBytes(), Base64.DEFAULT));
-
                 headers.put("Authorization ", " Basic " + auth);
-                Log.d("Application started", String.valueOf(headers));
                 return headers;
             }
 
@@ -160,9 +158,7 @@ public class SensorActivity extends AppCompatActivity {
                 // add headers <key,value>
                 User user = User.getInstancia();
                 String auth = new String(Base64.encode((user.getLogin() + ":" + user.getSenha()).getBytes(), Base64.DEFAULT));
-
                 headers.put("Authorization ", " Basic " + auth);
-                Log.d("Application started", String.valueOf(headers));
                 return headers;
             }
 
@@ -215,9 +211,7 @@ public class SensorActivity extends AppCompatActivity {
                 // add headers <key,value>
                 User user = User.getInstancia();
                 String auth = new String(Base64.encode((user.getLogin() + ":" + user.getSenha()).getBytes(), Base64.DEFAULT));
-
                 headers.put("Authorization ", " Basic " + auth);
-                Log.d("Application started", String.valueOf(headers));
                 return headers;
             }
 
@@ -276,9 +270,7 @@ public class SensorActivity extends AppCompatActivity {
                 // add headers <key,value>
                 User user = User.getInstancia();
                 String auth = new String(Base64.encode((user.getLogin() + ":" + user.getSenha()).getBytes(), Base64.DEFAULT));
-
                 headers.put("Authorization ", " Basic " + auth);
-                Log.d("Application started", String.valueOf(headers));
                 return headers;
             }
 

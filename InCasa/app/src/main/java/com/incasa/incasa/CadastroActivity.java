@@ -155,7 +155,7 @@ public class CadastroActivity extends AppCompatActivity {
                 toast.show();
             }
         });
-// Add the request to the RequestQueue.
+        // Add the request to the RequestQueue.
         //fila de requisições
         RequestQueue fila = Volley.newRequestQueue(this);
 
