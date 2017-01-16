@@ -168,8 +168,8 @@ public class FragmentCelular extends Fragment {
         fila.add(req);
     }
 
-    public void GetConfig(String URLCADASTRO) {
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLCADASTRO, null, new Response.Listener<JSONObject>() {
+    public void GetConfig(String URLGET) {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLGET, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -181,7 +181,6 @@ public class FragmentCelular extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(getActivity(), "Configuração Celular: Sucesso!" ,Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override

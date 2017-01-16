@@ -19,9 +19,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Temperatura"
             android:ems="10"
-            android:id="@+id/editNameSensor1"
+            android:id="@+id/editNameTemp"
+            android:maxLength="12"
             android:layout_weight="1" />
 
         <TextView
@@ -34,9 +34,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Descrição"
             android:ems="10"
-            android:id="@+id/editDescSensor1"
+            android:id="@+id/editDescTemp"
+            android:maxLength="40"
             android:layout_weight="1" />
 
         <TextView
@@ -49,9 +49,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Umidade"
             android:ems="10"
-            android:id="@+id/editNameSensor2"
+            android:id="@+id/editNameUmi"
+            android:maxLength="12"
             android:layout_weight="1" />
 
         <TextView
@@ -64,9 +64,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Descrição"
             android:ems="10"
-            android:id="@+id/editDescSensor2"
+            android:id="@+id/editDescUmi"
+            android:maxLength="40"
             android:layout_weight="1" />
 
         <TextView
@@ -79,9 +79,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Luminosidade"
             android:ems="10"
-            android:id="@+id/editNameSensor3"
+            android:id="@+id/editNameLumi"
+            android:maxLength="12"
             android:layout_weight="1" />
 
         <TextView
@@ -94,9 +94,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Descrição"
             android:ems="10"
-            android:id="@+id/editDescSensor3"
+            android:id="@+id/editDescLumi"
+            android:maxLength="40"
             android:layout_weight="1" />
 
         <TextView
@@ -109,9 +109,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Presença"
             android:ems="10"
-            android:id="@+id/editNameSensor4"
+            android:id="@+id/editNamePresenca"
+            android:maxLength="12"
             android:layout_weight="1" />
 
         <TextView
@@ -124,20 +124,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Descrição"
             android:ems="10"
-            android:id="@+id/editDescSensor4"
+            android:id="@+id/editDescPresenca"
+            android:maxLength="40"
             android:layout_weight="1" />
 
         <Button
-            android:text="Alterar"
+            android:text="Salvar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20px"
             android:layout_marginBottom="16px"
             android:layout_below="@+id/editName"
             android:background="@color/colorConfirm"
-            android:id="@+id/btnSensorConfig" />
+            android:id="@+id/btnSensorSalvar" />
 
     </LinearLayout>
 

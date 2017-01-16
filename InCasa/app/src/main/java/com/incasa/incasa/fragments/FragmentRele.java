@@ -41,9 +41,6 @@ public class FragmentRele extends Fragment {
     public Rele4 rele4 = Rele4.getInstancia();
     String ip;
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         SharedPreferences mSharedPreferences = this.getActivity().getSharedPreferences("ServerAdress",0);
@@ -173,7 +170,7 @@ public class FragmentRele extends Fragment {
                         jsonBody3.put("descricao", descricaoRele3);
                         rele3.setDescricao(descricaoRele3);
 
-                        jsonBody1.put("porta", rele1.getPorta());
+                        jsonBody1.put("porta", rele3.getPorta());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -338,8 +335,8 @@ public class FragmentRele extends Fragment {
         fila.add(req);
     }
 
-    public void GetRele1(String URLCADASTRO) {
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLCADASTRO, null, new Response.Listener<JSONObject>() {
+    public void GetRele1(String URLGETRELE1) {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLGETRELE1, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -351,7 +348,7 @@ public class FragmentRele extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(getActivity(), "Configuração Relê: Sucesso!" ,Toast.LENGTH_SHORT).show();
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -378,8 +375,8 @@ public class FragmentRele extends Fragment {
         fila.add(req);
     }
 
-    public void GetRele2(String URLCADASTRO) {
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLCADASTRO, null, new Response.Listener<JSONObject>() {
+    public void GetRele2(String URLGETRELE2) {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLGETRELE2, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -391,7 +388,7 @@ public class FragmentRele extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(getActivity(), "Configuração Relê: Sucesso!" ,Toast.LENGTH_SHORT).show();
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -418,8 +415,8 @@ public class FragmentRele extends Fragment {
         fila.add(req);
     }
 
-    public void GetRele3(String URLCADASTRO) {
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLCADASTRO, null, new Response.Listener<JSONObject>() {
+    public void GetRele3(String URLGETRELE3) {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLGETRELE3, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -431,7 +428,7 @@ public class FragmentRele extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(getActivity(), "Configuração Relê: Sucesso!" ,Toast.LENGTH_SHORT).show();
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -458,8 +455,8 @@ public class FragmentRele extends Fragment {
         fila.add(req);
     }
 
-    public void GetRele4(String URLCADASTRO) {
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLCADASTRO, null, new Response.Listener<JSONObject>() {
+    public void GetRele4(String URLGETRELE4) {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, URLGETRELE4, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
