@@ -5,10 +5,10 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -25,6 +25,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.Rele1;
+import model.Rele2;
+import model.Rele3;
+import model.Rele4;
 import model.User;
 
 public class ReleActivity extends AppCompatActivity {
@@ -52,6 +56,11 @@ public class ReleActivity extends AppCompatActivity {
 
         final String URLPOSTRELE = "http://"+ip+"/backend/releValor";
 
+        Rele1 Objrele1 = Rele1.getInstancia();
+        Rele2 Objrele2 = Rele2.getInstancia();
+        Rele3 Objrele3 = Rele3.getInstancia();
+        Rele4 Objrele4 = Rele4.getInstancia();
+
         getRele1(URLRELE1);
         getRele2(URLRELE2);
         getRele3(URLRELE3);
@@ -61,6 +70,16 @@ public class ReleActivity extends AppCompatActivity {
         Switch rele2 = (Switch) findViewById(R.id.switch2);
         Switch rele3 = (Switch) findViewById(R.id.switch3);
         Switch rele4 = (Switch) findViewById(R.id.switch4);
+
+        TextView nomeRele1 = (TextView) findViewById(R.id.lblRele1);
+        TextView nomeRele2 = (TextView) findViewById(R.id.lblRele2);
+        TextView nomeRele3 = (TextView) findViewById(R.id.lblRele3);
+        TextView nomeRele4 = (TextView) findViewById(R.id.lblRele4);
+
+        nomeRele1.setText(Objrele1.getNome());
+        nomeRele2.setText(Objrele2.getNome());
+        nomeRele3.setText(Objrele3.getNome());
+        nomeRele4.setText(Objrele4.getNome());
 
         rele1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
