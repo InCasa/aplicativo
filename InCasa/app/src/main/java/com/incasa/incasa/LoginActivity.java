@@ -55,6 +55,11 @@ public class LoginActivity extends Activity {
         this.ip = mSharedPreferences.getString("servidor", " ");
         final String URLLOGIN = "http://"+ip+"/backend/userLogin";
 
+        if(ip.equals(" ") || ip.equals("") || ip.equals(null)) {
+            Intent it = new Intent(LoginActivity.this, ServerActivity.class);
+            startActivity(it);
+        }
+
         btnCadastro.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
