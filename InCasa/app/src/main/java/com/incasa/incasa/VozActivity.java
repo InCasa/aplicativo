@@ -14,6 +14,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.speech.RecognizerIntent;
 import android.util.Base64;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -76,7 +77,7 @@ public class VozActivity extends AppCompatActivity {
 
     /**
      * Showing google speech input dialog
-     * */
+     */
     private void promptSpeechInput() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -95,7 +96,7 @@ public class VozActivity extends AppCompatActivity {
 
     /**
      * Receiving speech input
-     * */
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -107,22 +108,43 @@ public class VozActivity extends AppCompatActivity {
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     txtSpeechInput.setText(result.get(0));
+                    String preparse = result.get(0).toLowerCase();
 
-                    JSONObject jsonBody = new JSONObject();
-                    try {
-                        jsonBody.put("comando", result.get(0));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    String[] action = {"ligar", "desligar", "acender", "apagar", "qual"};
+                    String[] comando = preparse.split(" ");
+                    
+                    boolean enviado = false;
+
+                    for (int i = 0; i < action.length; i++) {
+                        if (action[i].equals(comando[0])) {
+                            JSONObject jsonBody = new JSONObject();
+                            try {
+                                jsonBody.put("comando", result.get(0));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            String URLCOMANDO = "http://" + ip + "/backend/comando";
+                            enviaComando(jsonBody, URLCOMANDO);
+                            enviado = true;
+                        }
+
+                    }
+                    if (!enviado) {
+                        Context context = getApplicationContext();
+                        CharSequence text = "Comando invalido";
+                        int duration = Toast.LENGTH_SHORT;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
                     }
 
-                    String URLCOMANDO = "http://"+ip+"/backend/comando";
-                    enviaComando(jsonBody, URLCOMANDO);
-
                 }
-                break;
-            }
 
+            }
+            break;
         }
+
     }
 
     public void enviaComando(JSONObject json, String URLCOMANDO) {
@@ -148,10 +170,10 @@ public class VozActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> headers = new HashMap<String, String>();
+                Map<String, String> headers = new HashMap<String, String>();
                 // add headers <key,value>
                 User user = User.getInstancia();
                 String auth = new String(Base64.encode((user.getLogin() + ":" + user.getSenha()).getBytes(), Base64.DEFAULT));

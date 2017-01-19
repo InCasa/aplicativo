@@ -15,17 +15,6 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.incasa.incasa.ServerActivity">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="192.168.0.100"
-            android:ems="10"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="38dp"
-            android:id="@+id/ip_server" />
-
         <Button
             android:text="Confirmar"
             android:layout_width="wrap_content"
@@ -47,6 +36,24 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Adicione o endereço ip do servidor."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="192.168.0.100"
+            android:ems="6"
+            android:layout_marginTop="43dp"
+            android:id="@+id/ip_server"
+            android:layout_below="@+id/textView4"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
 </ScrollView>
