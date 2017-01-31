@@ -206,7 +206,7 @@ public class FragmentRele extends Fragment {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, URLUPDATE, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getActivity(), "Configuração Relê: Atualizado com sucesso !" ,Toast.LENGTH_SHORT).show();
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -240,7 +240,7 @@ public class FragmentRele extends Fragment {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, URLUPDATE, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getActivity(), "Configuração Relê: Atualizado com sucesso !" ,Toast.LENGTH_SHORT).show();
+                
             }
         }, new Response.ErrorListener() {
             @Override
@@ -274,7 +274,7 @@ public class FragmentRele extends Fragment {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, URLUPDATE, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getActivity(), "Configuração Relê: Atualizado com sucesso !" ,Toast.LENGTH_SHORT).show();
+
             }
         }, new Response.ErrorListener() {
             @Override

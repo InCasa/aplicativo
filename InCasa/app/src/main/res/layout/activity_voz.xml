@@ -28,4 +28,14 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/circle_button" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtSpeechInput"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="95dp"
+        android:id="@+id/txtSpeechOutput"
+        android:textSize="28sp"
+        android:textStyle="normal|bold" />
+
 </RelativeLayout>

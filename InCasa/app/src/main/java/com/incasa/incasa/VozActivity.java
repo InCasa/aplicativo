@@ -36,6 +36,7 @@ import model.User;
 public class VozActivity extends AppCompatActivity {
     String ip;
     private TextView txtSpeechInput;
+    private TextView txtSpeechOutput;
     private View btnSpeak;
     private final int REQ_CODE_SPEECH_INPUT = 100;
 
@@ -49,6 +50,7 @@ public class VozActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         txtSpeechInput = (TextView) findViewById(R.id.txtSpeechInput);
+        txtSpeechOutput = (TextView) findViewById(R.id.txtSpeechOutput);
         btnSpeak = findViewById(R.id.btnSpeak);
 
         SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", 0);
@@ -108,6 +110,7 @@ public class VozActivity extends AppCompatActivity {
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     txtSpeechInput.setText(result.get(0));
+                    txtSpeechOutput.setText("");
                     String preparse = result.get(0).toLowerCase();
 
                     String[] action = {"ligar", "desligar", "acender", "apagar", "qual"};
@@ -158,17 +161,21 @@ public class VozActivity extends AppCompatActivity {
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+
+                try {
+                    String resposta = response.getString("valor");
+                    txtSpeechOutput.setText(resposta);
+                    txtSpeechInput.setText("");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             //Em caso de erro
             @Override
             public void onErrorResponse(VolleyError error) {
-                Context context = getApplicationContext();
-                CharSequence text = "Erro na requisição";
-                int duration = Toast.LENGTH_SHORT;
 
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
             }
         }) {
             @Override
