@@ -25,10 +25,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import model.Rele1;
-import model.Rele2;
-import model.Rele3;
-import model.Rele4;
+import model.Rele;
 import model.User;
 
 public class ReleActivity extends AppCompatActivity {
@@ -56,10 +53,15 @@ public class ReleActivity extends AppCompatActivity {
 
         final String URLPOSTRELE = "http://"+ip+"/backend/releValor";
 
-        Rele1 Objrele1 = Rele1.getInstancia();
-        Rele2 Objrele2 = Rele2.getInstancia();
-        Rele3 Objrele3 = Rele3.getInstancia();
-        Rele4 Objrele4 = Rele4.getInstancia();
+        Rele Objrele1 = new Rele();
+        Rele Objrele2 = new Rele();
+        Rele Objrele3 = new Rele();
+        Rele Objrele4 = new Rele();
+
+        Objrele1 = HomeActivity.Rele1;
+        Objrele2 = HomeActivity.Rele2;
+        Objrele3 = HomeActivity.Rele3;
+        Objrele4 = HomeActivity.Rele4;
 
         getRele1(URLRELE1);
         getRele2(URLRELE2);

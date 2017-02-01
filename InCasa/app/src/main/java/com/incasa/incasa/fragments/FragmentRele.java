@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.incasa.incasa.HomeActivity;
 import com.incasa.incasa.R;
 
 import org.json.JSONException;
@@ -28,23 +28,26 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import model.Rele1;
-import model.Rele2;
-import model.Rele3;
-import model.Rele4;
+import model.Rele;
 import model.User;
 
 public class FragmentRele extends Fragment {
-    public Rele1 rele1 = Rele1.getInstancia();
-    public Rele2 rele2 = Rele2.getInstancia();
-    public Rele3 rele3 = Rele3.getInstancia();
-    public Rele4 rele4 = Rele4.getInstancia();
+    Rele rele1 = new Rele();
+    Rele rele2 = new Rele();
+    Rele rele3 = new Rele();
+    Rele rele4 = new Rele();
+
     String ip;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         SharedPreferences mSharedPreferences = this.getActivity().getSharedPreferences("ServerAdress",0);
         this.ip = mSharedPreferences.getString("servidor", null);
+
+        rele1 = HomeActivity.Rele1;
+        rele2 = HomeActivity.Rele2;
+        rele3 = HomeActivity.Rele3;
+        rele4 = HomeActivity.Rele4;
 
         String URLGETRELE1 = "http://"+ip+"/backend/rele/1";
         String URLGETRELE2 = "http://"+ip+"/backend/rele/2";
@@ -240,7 +243,7 @@ public class FragmentRele extends Fragment {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, URLUPDATE, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                
+
             }
         }, new Response.ErrorListener() {
             @Override

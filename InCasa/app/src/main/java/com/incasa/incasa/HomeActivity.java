@@ -33,10 +33,7 @@ import model.Aplicativo;
 import model.Arduino;
 import model.Luminosidade;
 import model.Presenca;
-import model.Rele1;
-import model.Rele2;
-import model.Rele3;
-import model.Rele4;
+import model.Rele;
 import model.Temperatura;
 import model.Umidade;
 import model.User;
@@ -46,6 +43,11 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     String ip;
+
+    public static Rele Rele1 = new Rele();
+    public static Rele Rele2 = new Rele();
+    public static Rele Rele3 = new Rele();
+    public static Rele Rele4 = new Rele();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -556,11 +558,10 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Rele1 rele1 = Rele1.getInstancia();
-                    rele1.setIdRele(response.getInt("id"));
-                    rele1.setNome(response.getString("nome"));
-                    rele1.setDescricao(response.getString("descricao"));
-                    rele1.setPorta(response.getInt("porta"));
+                    Rele1.setIdRele(response.getInt("id"));
+                    Rele1.setNome(response.getString("nome"));
+                    Rele1.setDescricao(response.getString("descricao"));
+                    Rele1.setPorta(response.getInt("porta"));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -598,11 +599,10 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Rele2 rele2 = Rele2.getInstancia();
-                    rele2.setIdRele(response.getInt("id"));
-                    rele2.setNome(response.getString("nome"));
-                    rele2.setDescricao(response.getString("descricao"));
-                    rele2.setPorta(response.getInt("porta"));
+                    Rele2.setIdRele(response.getInt("id"));
+                    Rele2.setNome(response.getString("nome"));
+                    Rele2.setDescricao(response.getString("descricao"));
+                    Rele2.setPorta(response.getInt("porta"));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -640,11 +640,10 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Rele3 rele3 = Rele3.getInstancia();
-                    rele3.setIdRele(response.getInt("id"));
-                    rele3.setNome(response.getString("nome"));
-                    rele3.setDescricao(response.getString("descricao"));
-                    rele3.setPorta(response.getInt("porta"));
+                    Rele3.setIdRele(response.getInt("id"));
+                    Rele3.setNome(response.getString("nome"));
+                    Rele3.setDescricao(response.getString("descricao"));
+                    Rele3.setPorta(response.getInt("porta"));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -682,11 +681,10 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Rele4 rele4 = Rele4.getInstancia();
-                    rele4.setIdRele(response.getInt("id"));
-                    rele4.setNome(response.getString("nome"));
-                    rele4.setDescricao(response.getString("descricao"));
-                    rele4.setPorta(response.getInt("porta"));
+                    Rele4.setIdRele(response.getInt("id"));
+                    Rele4.setNome(response.getString("nome"));
+                    Rele4.setDescricao(response.getString("descricao"));
+                    Rele4.setPorta(response.getInt("porta"));
 
                 } catch (JSONException e) {
                     e.printStackTrace();

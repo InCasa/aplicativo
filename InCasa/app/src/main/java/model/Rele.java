@@ -1,12 +1,10 @@
 package model;
 
-public class Rele2 {
+public class Rele {
     public int idRele;
     public String nome;
     public String descricao;
     public int porta;
-
-    public static Rele2 rele2;
 
     public int getIdRele() {
         return idRele;
@@ -40,14 +38,7 @@ public class Rele2 {
         this.porta = porta;
     }
 
-    private Rele2() {
-    }
+    public Rele() {
 
-    public static Rele2 getInstancia(){
-        if(rele2 == null){
-            rele2 = new Rele2();
-        }
-
-        return rele2;
     }
 }
