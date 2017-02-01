@@ -38,20 +38,23 @@
         </activity>
         <activity android:name=".SensorActivity" />
         <activity android:name=".ReleActivity" />
-        <activity android:name=".ConfigActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".AdminActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".ConfigActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".AdminActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".VozActivity" />
         <activity
             android:name=".LoginActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".CadastroActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ServerActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Dicas"></activity>
     </application>
 
 </manifest>

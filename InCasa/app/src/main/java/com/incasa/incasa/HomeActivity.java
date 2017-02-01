@@ -178,6 +178,9 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_admin) {
             Intent intent = new Intent(this, AdminActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_dicas) {
+            Intent intent = new Intent(this, Dicas.class);
+            startActivity(intent);
         }else if (id == R.id.nav_logout) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
