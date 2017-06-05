@@ -32,15 +32,6 @@ import model.User;
 public class SensorActivity extends AppCompatActivity {
     String ip;
 
-    final String URLTEMPERATURA = "http://"+ip+"/backend/temperaturaValor";
-    final String URLUMIDADE = "http://"+ip+"/backend/umidadeValor";
-    final String URLLUMINOSIDADE = "http://"+ip+"/backend/luminosidadeValor";
-    final String URLPRESENCA = "http://"+ip+"/backend/presencaValor";
-
-    private Timer mTimer1;
-    private TimerTask mTt1;
-    private Handler mTimerHandler = new Handler();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,33 +43,29 @@ public class SensorActivity extends AppCompatActivity {
         SharedPreferences mSharedPreferences = getSharedPreferences("ServerAdress", 0);
         this.ip = mSharedPreferences.getString("servidor", " ");
 
+        final String URLTEMPERATURA = "http://"+ip+"/backend/temperaturaValor";
+        final String URLUMIDADE = "http://"+ip+"/backend/umidadeValor";
+        final String URLLUMINOSIDADE = "http://"+ip+"/backend/luminosidadeValor";
+        final String URLPRESENCA = "http://"+ip+"/backend/presencaValor";
+
         getTemperatura(URLTEMPERATURA);
         getUmidade(URLUMIDADE);
         getLuminosidade(URLLUMINOSIDADE);
         getPresenca(URLPRESENCA);
 
-        startTimer();
-
-    }
-
-    private void startTimer(){
-        mTimer1 = new Timer();
-        mTt1 = new TimerTask() {
+        Timer timerObj = new Timer();
+        TimerTask timerTaskObj = new TimerTask() {
             public void run() {
-                mTimerHandler.post(new Runnable() {
-                    public void run(){
-                        getTemperatura(URLTEMPERATURA);
-                        getUmidade(URLUMIDADE);
-                        getLuminosidade(URLLUMINOSIDADE);
-                        getPresenca(URLPRESENCA);
+                getTemperatura(URLTEMPERATURA);
+                getUmidade(URLUMIDADE);
+                getLuminosidade(URLLUMINOSIDADE);
+                getPresenca(URLPRESENCA);
 
-                        Log.d("DEBBUG", "Atualizou em 10 segundos");
-                    }
-                });
+                Log.d("DEBBUG", "Atualizou em 10 segundos");
             }
         };
+        timerObj.schedule(timerTaskObj, 0, 10000);
 
-        mTimer1.schedule(mTt1, 1, 10000);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
