@@ -184,7 +184,6 @@ public class SensorActivity extends AppCompatActivity {
                 if(lumi.equals("null")){
                     txtLumi.setText("N/A");
                 }else {
-                    lumi =  lumi + "%";
                     txtLumi.setText(lumi);
                 }
             } catch (JSONException e) {
