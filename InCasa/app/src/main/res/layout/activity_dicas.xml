@@ -63,11 +63,11 @@
             android:textStyle="normal|bold" />
 
         <TextView
-            android:text="GitHub: github/incasa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_margin="5sp"/>
+            android:layout_margin="5sp"
+            android:text="GitHub: incasa.github.io"
+            android:textSize="16sp" />
 
         <TextView
             android:text="Rodrigo: rodrigo.uba@gmail.com"

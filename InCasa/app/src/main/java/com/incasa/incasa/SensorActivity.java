@@ -147,6 +147,7 @@ public class SensorActivity extends AppCompatActivity {
                 if(umi.equals("null")){
                     txtUmi.setText("N/A");
                 }else {
+                    umi =  umi + "%";
                     txtUmi.setText(umi);
                 }
             } catch (JSONException e) {

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="171dp"
+            android:paddingLeft="16sp"
+            android:textSize="18sp"
+            android:paddingBottom="20sp"
+            android:text="Quando o modo Alarme está ativo qualquer detecção de movimento nos sensores de presença automaticamente envia uma notificação ao seu dispositivo." />
+
+        <Switch
+            android:id="@+id/switchAlarme"
+            android:layout_width="match_parent"
+            android:layout_height="147dp"
+            android:checked="false"
+            android:paddingBottom="60sp"
+            android:paddingLeft="80sp"
+            android:paddingRight="80sp"
+            android:paddingTop="30sp"
+            android:text="Alarme" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="185dp"
+            android:paddingLeft="16sp"
+            android:textSize="16sp"
+            android:paddingBottom="20sp"
+            android:paddingTop="80sp"
+            android:text="*O modo alarme só funciona quando o aplicativo está aberto e ativo, caso o contrário essa notificação não ocorre." />
+
+    </LinearLayout>
+
+
+
+</ScrollView>

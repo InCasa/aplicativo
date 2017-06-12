@@ -15,6 +15,10 @@
             android:icon="@drawable/ic_mic_black_48dp"
             android:title="Voz" />
         <item
+            android:id="@+id/nav_alarme"
+            android:icon="@drawable/ic_add_alert_black_48dp"
+            android:title="Alarme" />
+        <item
             android:id="@+id/nav_config"
             android:icon="@drawable/ic_settings_black_48dp"
             android:title="Configuração" />

@@ -50,7 +50,8 @@
         <activity
             android:name=".ServerActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Dicas"></activity>
+        <activity android:name=".DicasActivity"></activity>
+        <activity android:name=".AlarmeActivity"></activity>
     </application>
 
 </manifest>
