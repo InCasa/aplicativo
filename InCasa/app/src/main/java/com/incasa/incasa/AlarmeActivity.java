@@ -42,6 +42,9 @@ public class AlarmeActivity extends AppCompatActivity {
     NotificationCompat.Builder Alerta;
     private static final int IdAlerta = 14022;
 
+    Timer timer = new Timer();
+    TimerTask AlarmeThread;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,11 +61,11 @@ public class AlarmeActivity extends AppCompatActivity {
             AlarmeSwitch.setChecked(true);
         }
 
-        final String URLPRESENCA = "http://"+ip+"/backend/presencaValor";
+        final String URLPRESENCA = "http://"+ip+"/backend/presencaValorNow";
 
         //Thread para checar se o modo alarme esta ativo a cada 3seg
-        Timer timer = new Timer();
-        final TimerTask AlarmeThread = new TimerTask() {
+        timer = new Timer();
+        AlarmeThread = new TimerTask() {
             public void run() {
                 getPresenca(URLPRESENCA);
 
@@ -90,6 +93,15 @@ public class AlarmeActivity extends AppCompatActivity {
         }
 
         });
+    }
+
+    //Quando a activity for finalizada a thread é finalizada junto
+    protected void onDestroy() {
+        super.onDestroy();
+
+        timer.cancel();
+        timer.purge();
+        AlarmeThread.cancel();
     }
 
     public void Notificacao(){

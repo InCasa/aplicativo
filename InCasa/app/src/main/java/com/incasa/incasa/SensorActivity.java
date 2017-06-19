@@ -32,6 +32,9 @@ import model.User;
 public class SensorActivity extends AppCompatActivity {
     String ip;
 
+    Timer timerObj = new Timer();
+    TimerTask timerTaskObj;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +57,8 @@ public class SensorActivity extends AppCompatActivity {
         getPresenca(URLPRESENCA);
 
         //Thread para atualizar os valores dos sensores a cada 10seg
-        Timer timerObj = new Timer();
-        TimerTask timerTaskObj = new TimerTask() {
+        timerObj = new Timer();
+        timerTaskObj = new TimerTask() {
             public void run() {
                 getTemperatura(URLTEMPERATURA);
                 getUmidade(URLUMIDADE);
@@ -63,8 +66,17 @@ public class SensorActivity extends AppCompatActivity {
                 getPresenca(URLPRESENCA);
             }
         };
-        timerObj.schedule(timerTaskObj, 0, 10000);
+        timerObj.schedule(timerTaskObj, 0, 5000);
 
+    }
+
+    //Quando a activity for finalizada a thread é finalizada junto
+    protected void onDestroy() {
+        super.onDestroy();
+
+        timerObj.cancel();
+        timerObj.purge();
+        timerTaskObj.cancel();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

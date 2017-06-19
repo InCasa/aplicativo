@@ -37,6 +37,9 @@ public class ReleActivity extends AppCompatActivity {
     boolean estado4;
     String ip;
 
+    Timer timerObj = new Timer();
+    TimerTask timerTaskObj;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,8 +74,8 @@ public class ReleActivity extends AppCompatActivity {
         getRele4(URLRELE4);
 
         //Thread para atualizar os valores dos reles a cada 10seg
-        Timer timerObj = new Timer();
-        TimerTask timerTaskObj = new TimerTask() {
+        timerObj = new Timer();
+        timerTaskObj = new TimerTask() {
             public void run() {
                 getRele1(URLRELE1);
                 getRele2(URLRELE2);
@@ -80,7 +83,7 @@ public class ReleActivity extends AppCompatActivity {
                 getRele4(URLRELE4);
             }
         };
-        timerObj.schedule(timerTaskObj, 0, 10000);
+        timerObj.schedule(timerTaskObj, 0, 2000);
 
         Switch rele1 = (Switch) findViewById(R.id.switch1);
         Switch rele2 = (Switch) findViewById(R.id.switch2);
@@ -217,6 +220,15 @@ public class ReleActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    //Quando a activity for finalizada a thread é finalizada junto
+    protected void onDestroy() {
+        super.onDestroy();
+
+        timerObj.cancel();
+        timerObj.purge();
+        timerTaskObj.cancel();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
