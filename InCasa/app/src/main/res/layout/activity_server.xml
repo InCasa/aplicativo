@@ -52,7 +52,6 @@
             android:ems="6"
             android:layout_marginTop="43dp"
             android:id="@+id/ip_server"
-            android:layout_below="@+id/textView4"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
