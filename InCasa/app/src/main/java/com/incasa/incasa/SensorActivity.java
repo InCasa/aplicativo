@@ -53,6 +53,7 @@ public class SensorActivity extends AppCompatActivity {
         getLuminosidade(URLLUMINOSIDADE);
         getPresenca(URLPRESENCA);
 
+        //Thread para atualizar os valores dos sensores a cada 10seg
         Timer timerObj = new Timer();
         TimerTask timerTaskObj = new TimerTask() {
             public void run() {
@@ -60,8 +61,6 @@ public class SensorActivity extends AppCompatActivity {
                 getUmidade(URLUMIDADE);
                 getLuminosidade(URLLUMINOSIDADE);
                 getPresenca(URLPRESENCA);
-
-                Log.d("DEBBUG", "Atualizou em 10 segundos");
             }
         };
         timerObj.schedule(timerTaskObj, 0, 10000);

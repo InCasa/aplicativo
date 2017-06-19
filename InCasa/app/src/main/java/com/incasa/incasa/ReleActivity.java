@@ -24,6 +24,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import model.Rele;
 import model.User;
@@ -67,6 +69,18 @@ public class ReleActivity extends AppCompatActivity {
         getRele2(URLRELE2);
         getRele3(URLRELE3);
         getRele4(URLRELE4);
+
+        //Thread para atualizar os valores dos reles a cada 10seg
+        Timer timerObj = new Timer();
+        TimerTask timerTaskObj = new TimerTask() {
+            public void run() {
+                getRele1(URLRELE1);
+                getRele2(URLRELE2);
+                getRele3(URLRELE3);
+                getRele4(URLRELE4);
+            }
+        };
+        timerObj.schedule(timerTaskObj, 0, 10000);
 
         Switch rele1 = (Switch) findViewById(R.id.switch1);
         Switch rele2 = (Switch) findViewById(R.id.switch2);
